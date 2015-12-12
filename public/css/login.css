@@ -1,0 +1,33 @@
+
+
+.forms {
+    display: inline-block;
+    width: 40%;
+    height: 60%;
+    vertical-align: top;
+    position: relative;
+    padding: 1em;
+    background: ivory;
+    color: black;
+    border-radius: 10px;
+    border-bottom: 1px solid #999;
+    margin: auto;
+}
+
+.header-note
+{
+    text-align: left;
+}
+
+
+
+
+
+
+
+
+footer
+{
+    font-size: 0.8em;
+    margin: auto auto 0 auto;
+}
