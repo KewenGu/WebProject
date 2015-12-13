@@ -11,8 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script type="text/JavaScript" src="http://underscorejs.org/underscore-min.js" ></script>
     <script type="text/javascript" src="template.js"></script>
-
-    </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -135,7 +133,79 @@
 
         console.log(this);
       });
-
     };
+
+    function login() {
+      var el1 = document.getElementById("login-username");
+      var el2 = document.getElementById("login-password");
+
+      var req = new XMLHttpRequest();
+      req.open('POST', '/login', true);
+      req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      req.onload = function () {
+        makeGet('/status', notif);
+      };
+      req.send('username=' + el1.value + '&password=' + el2.value);
+    }
+
+    function signup() {
+      var el1 = document.getElementById("signup-username");
+      var el2 = document.getElementById("signup-password");
+      var el3 = document.getElementById("signup-email");
+
+      var req = new XMLHttpRequest();
+      req.open('POST', '/signup', true);
+      req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      req.onload = function () {
+        makeGet('/status', notif);
+      };
+      req.send('username=' + el1.value + '&password=' + el2.value + '&email=' + el3.value);
+
+    }
+
+
+
+    makeGet('/login', "#login-notif");
+    makeGet('/signup', "#signup-notif");
+
+
+    function makeGet(url, id) {
+      var req = new XMLHttpRequest();
+
+      req.onreadystatechange = function() {
+        handleRes(req, id);
+      };
+
+      req.open('GET', url);
+      req.send();
+    }
+
+    function handleRes(req, id) {
+      if( req.readyState !== XMLHttpRequest.DONE )
+        return;
+
+      if(req.status === 200) {
+        console.log(id);
+        console.log(req.responseText);
+        if (id === "#login-notif" && req.responseText === "Done") {
+          console.log("proceed into main page")
+          window.location.assign("/main");
+        }
+        else if (id === "#signup-notif" && req.responseText === "Done") {
+          document.querySelector(id).innerText = "Your account has been created!";
+        }
+        else {
+          document.querySelector(id).innerText = req.responseText;
+        }
+
+      }
+    }
+
+    function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
   </script>
 </html>
