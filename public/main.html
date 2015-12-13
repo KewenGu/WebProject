@@ -1,72 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>CS4241-B15 Homework Assignment 7</title>
     <meta charset="utf-8">
+    <title></title>
     <link rel="stylesheet" href="css/main.css">
-    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-    <script src="http://underscorejs.org/underscore-min.js"></script>
-    <!-- Author: Kewen Gu -->
-    <!-- URL: https://kgu-cs4241-main.herokuapp.com -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/JavaScript" src="http://underscorejs.org/underscore-min.js" ></script>
+    <script type="text/javascript" src="template.js"></script>
+
+    </script>
   </head>
   <body>
-    <article>
-      <header>
-        <div id="top">
-          <h1>Assignment 7</h1>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+
+          <a class="navbar-brand" href="#">Brand</a>
         </div>
-      </header>
-      <div id="menu">
-        <p style="color: black;" onclick="location.href='#top';"><b>List of Pixar Movies: </b></p>
-        <p onclick="location.href='#Toy Story';">Toy Story</p>
-        <p onclick="location.href='#Toy Story 2';">Toy Story 2</p>
-        <p onclick="location.href='#Monsters, Inc.';">Monsters, Inc.</p>
-        <p onclick="location.href='#Finding Nemo';">Finding Nemo</p>
-        <p onclick="location.href='#The Incredibles';">The Incredibles</p>
-        <p onclick="location.href='#Cars';">Cars</p>
-        <p onclick="location.href='#Ratatouille';">Ratatouille</p>
-        <p onclick="location.href='#WALL-E';">WALL-E</p>
-        <p onclick="location.href='#Up';">Up</p>
-        <p onclick="location.href='#Toy Story 3';">Toy Story 3</p>
-        <p onclick="location.href='#Cars 2';">Cars 2</p>
-        <p onclick="location.href='#Brave';">Brave</p>
-        <p onclick="location.href='#Monsters University';">Monsters University</p>
-        <p onclick="location.href='#Inside Out';">Inside Out</p>
-        <p onclick="location.href='#The Good Dinosaur';">The Good Dinosaur</p>
-        <p onclick="location.href='#Finding Dory';">Finding Dory</p>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+            <li><a href="#">Link</a></li>
+          </ul>
+          <!-- <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form> -->
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Notification</a></li>
+            <li><a href="#">Sign out</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+        <div class="row">
+          <div class="col-sm-4">
+            Filter by:
+            <input type="search" name="filter" value="">
+          </div>
+          <div class="col-sm-4">
+            Sort by:
+            <input type="search" name="sort" value="">
+          </div>
+          <div class="col-sm-4">
+            <p id="addOne">
+              Add new one<span class="glyphicons glyphicons-plus"></span>
+            </p>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div id="main-part" class="container">
+      <div class="col-sm-4" id="note1">
+        <h3>Now led tedious shy lasting females off</h3>
+        <p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>
+        <p>Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper up he it enjoyment agreeable depending. Timed voice share led his widen noisy young. On weddings believed laughing although material do exercise of. Up attempt offered ye civilly so sitting to. She new course get living within elinor joy. She her rapturous suffering concealed.</p>
       </div>
-      <section>
-        <!-- <div id="media" align="center"></div>
-        <div id="forms">
-          <form>
-            <p class="header-note" id="list"><b>Browse the List of Pixar Movies</b></p>
-            <button type="submit" class="button" onclick="fullList();">Click here to see the full list</button>
-          </form>
-          <form>
-              <p class="header-note" id="filter">Please Enter the Keyword Below to Filter:</p>
-              <input type="text" name="search" id='filterBox'>
-              <input type="submit" value="Submit" class="button" onclick="operation('filterBox', '/filter');">
-          </form>
-          <form>
-              <p class="header-note" id="movies">Or, Add/Delete the movie of your choice:</p>
-              <input type="text" id="movieBox" required>
-              <input type="submit" value="Add" class="button" onclick="operation('movieBox', '/add');">
-          </form>
-
-          <br />
-          <div id="movie-list" align="center"></div>
-
-        </div> -->
-
-        <!-- <iframe id="movie-list" width="300" height="350" frameborder="1" scrolling="yes" align="center"></iframe> -->
-        <div id="movie-list"></div>
-        <p class="quote">#FINALWEEK @WPI</p>
-      </section>
-      <footer>
-        <p class="copyright">CS 4241: Webware (Fall 2015)</p>
-        <p class="copyright">Worcester Polytechnic Institute</p>
-      </footer>
-    </article>
+      <dialog id="popup-note">
+        <p>Hi, I'm a dialog!</p>
+        <button class="close">Okay</button>
+      </dialog>
+      <div class="col-sm-4">
+        <h3>Now led tedious shy lasting females off</h3>
+        <p>An so vulgar to on points wanted. Not rapturous resolving continued household northward gay. He it otherwise supported instantly. Unfeeling agreeable suffering it on smallness newspaper be. So come must time no as. Do on unpleasing possession as of unreserved. Yet joy exquisite put sometimes enjoyment perpetual now. Behind lovers eat having length horses vanity say had its.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Now led tedious shy lasting females off</h3>
+        <p>Impossible considered invitation him men instrument saw celebrated unpleasant. Put rest and must set kind next many near nay. He exquisite continued explained middleton am. Voice hours young woody has she think equal. Estate moment he at on wonder at season little. Six garden result summer set family esteem nay estate. End admiration mrs unreserved discovered comparison especially invitation.</p>
+        <p>An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Now led tedious shy lasting females off</h3>
+        <p>Far concluded not his something extremity. Want four we face an he gate. On he of played he ladies answer little though nature. Blessing oh do pleasure as so formerly. Took four spot soon led size you. Outlived it received he material. Him yourself joy moderate off repeated laughter outweigh screened.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Now led tedious shy lasting females off</h3>
+        <p>Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Now led tedious shy lasting females off</h3>
+        <p>Bringing unlocked me an striking ye perceive. Mr by wound hours oh happy. Me in resolution pianoforte continuing we. Most my no spot felt by no. He he in forfeited furniture sweetness he arranging. Me tedious so to behaved written account ferrars moments. Too objection for elsewhere her preferred allowance her. Marianne shutters mr steepest to me. Up mr ignorant produced distance although is sociable blessing. Ham whom call all lain like.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Sudden looked elinor off gay estate nor silent</h3>
+        <p>Not far stuff she think the jokes. Going as by do known noise he wrote round leave. Warmly put branch people narrow see. Winding its waiting yet parlors married own feeling. Marry fruit do spite jokes an times. Whether at it unknown warrant herself winding if. Him same none name sake had post love. An busy feel form hand am up help. Parties it brother amongst an fortune of. Twenty behind wicket why age now itself ten.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Sudden looked elinor off gay estate nor silent</h3>
+        <p>Believing neglected so so allowance existence departure in. In design active temper be uneasy. Thirty for remove plenty regard you summer though. He preference connection astonished on of ye. Partiality on or continuing in particular principles as. Do believing oh disposing to supported allowance we.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Sudden looked elinor off gay estate nor silent</h3>
+        <p>Arrival entered an if drawing request. How daughters not promotion few knowledge contented. Yet winter law behind number stairs garret excuse. Minuter we natural conduct gravity if pointed oh no. Am immediate unwilling of attempted admitting disposing it. Handsome opinions on am at it ladyship.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Sudden looked elinor off gay estate nor silent</h3>
+        <p>Pianoforte solicitude so decisively unpleasing conviction is partiality he. Or particular so diminution entreaties oh do. Real he me fond show gave shot plan. Mirth blush linen small hoped way its along. Resolution frequently apartments off all discretion devonshire. Saw sir fat spirit seeing valley. He looked or valley lively. If learn woody spoil of taken he cause.</p>
+        <p>Name were we at hope. Remainder household direction zealously the unwilling bed sex. Lose and gay ham sake met that. Stood her place one ten spoke yet. Head case knew ever set why over. Marianne returned of peculiar replying in moderate. Roused get enable garret estate old county. Entreaties you devonshire law dissimilar terminated.</p>
+      </div>
+    </div>
   </body>
-  <script src='js/assign7.js'> </script>
+
+  <script type="text/javascript">
+    var sample = {
+      title: "It sportsman earnestly ye preserved an on",
+      contents: "Too cultivated use solicitude frequently. Dashwood likewise up consider continue entrance ladyship oh. Wrong guest given purse power is no. Friendship to connection an am considered difficulty. Country met pursuit lasting moments why calling certain the. Middletons boisterous our way understood law. Among state cease how and sight since shall. Material did pleasure breeding our humanity she contempt had. So ye really mutual no cousin piqued summer result."
+      // createdTime:
+    };
+
+    window.onload = function () {
+      var addOne = document.getElementById('addOne');
+      var notesContener = document.getElementById('main-part');
+
+      addOne.addEventListener('click', function () {
+        var aNote = document.createElement("div");
+        aNote.setAttribute("class", "col-sm-4");
+        sample.createdTime = new Date();
+        aNote.innerHTML = noteTemplate(sample);
+        notesContener.appendChild(aNote);
+      });
+
+      var firstNote = document.getElementById('note1');
+      var firstDialog = document.getElementById('popup-note');
+
+      firstNote.addEventListener('click', function (e) {
+        e.preventDefault();
+        firstDialog.show();
+
+        console.log(this);
+      });
+
+    };
+  </script>
 </html>
