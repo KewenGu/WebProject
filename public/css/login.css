@@ -1,17 +1,38 @@
 
+body
+{
+    background-image: url("../res/login-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    width: auto;
+    height: auto;
+}
 
-.forms {
+#form
+{
     display: inline-block;
-    width: 40%;
-    height: 60%;
+    padding: 17%;
+    margin: 0 auto;
+}
+
+.forms
+{
     vertical-align: top;
     position: relative;
-    padding: 1em;
-    background: ivory;
+    background: rgba(255, 255, 240, 0.6);
     color: black;
     border-radius: 10px;
     border-bottom: 1px solid #999;
-    margin: auto;
+    padding: 5%;
+    margin: auto 5%;
+    width: 100px;
+}
+
+
+.textfield
+{
+    margin: 10px;
+    float: right;
 }
 
 .header-note
@@ -28,6 +49,8 @@
 
 footer
 {
+    text-align: center;
+    color: ivory;
     font-size: 0.8em;
     margin: auto auto 0 auto;
 }
