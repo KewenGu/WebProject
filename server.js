@@ -116,12 +116,12 @@ app.post('/signup', urlencodedParser, function(req, res) {
 		signup_status = "All fields are required.";
 });
 
-// post 传入 title, contents, create_time, modify_time, is_starred, remind_info, attachment_path
+// post 传入 title, content, create_time, modify_time, is_starred, remind_info, attachment_path
 app.post('/add', urlencodedParser, function(req, res) {
 	var note = {
 		id: id,
 		title: req.body.title,
-	  contents: req.body.contents,
+	  content: req.body.content,
 		create_time: req.body.create_time,
 	  modify_time: req.body.modify_time,
 	  is_starred: req.body.is_starred,
@@ -151,13 +151,13 @@ app.post('/delete', urlencodedParser, function(req, res) {
 	fs.writeFileSync("./public/res/profiles.json", JSON.stringify(profiles));
 });
 
-// post 传入 id, title, contents, create_time, modify_time, is_starred, remind_info, attachment_path
+// post 传入 id, title, content, create_time, modify_time, is_starred, remind_info, attachment_path
 app.post('/modify', urlencodedParser, function(req, res) {
 	profile.forEach(function(user) {
 		user.notes.forEach(function(note) {
 			if (note.id === req.body.id) {
 				note.title = req.body.title;
-				note.contents = req.body.contents;
+				note.content = req.body.content;
 				note.create_time = req.body.create_time;
 				note.modify_time = req.body.modify_time;
 				note.is_starred = req.body.is_starred;
