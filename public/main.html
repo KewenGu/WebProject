@@ -83,7 +83,7 @@
           <input type="search" name="sort" value="">
         </div>
         <div class="col-sm-4">
-          <button id="add-one"">
+          <button id="add-one">
             Add a new <span class="glyphicons glyphicons-plus"></span>
           </button>
         </div>
@@ -92,7 +92,7 @@
   </nav>
   <div id="main-part" class="container">
     <div class="col-sm-4" id="note1">
-      <h3>Now led tedious shy lasting females off</h3>
+      <h3 id="note1-title">Now led tedious shy lasting females off</h3>
       <p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>
     </div>
     <div class="col-sm-4">
@@ -143,25 +143,25 @@
 
 <dialog id="add-dialog">
   <div class="add-note">
+    <input id="add-close" class="close-edit" type="button" name="close" value="Close"><br>
     <form action = "/add" method = "post">
       <input type="button" name="star" value="Star">
-      <label for="add-share" name = "Share to" id = "add-share"> Share to :</label>
+      <label for="add-share" name = "Share to" id = "add-share" class="share-edit"> Share to :</label>
       <input type="text" name="share" placeholder="Username/Email">
-      <input type="button" name="close" value="Close">
       <br>
       <br>
       <br>
       <label for="add-title"> Title</label>
-      <input type="text" name="title" id="add-title" placeholder="Edit your title here">
-      <p style="display: inline-block;">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
+      <input type="text" name="title" id="add-title" placeholder="Edit your title here"><br>
+      <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
       <p>Attached File : </p><div class="attachment"></div>
-      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();">
+      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
       <br>
       <br>
       <label for="add-content">Contents:</label>
       <br>
       <br>
-      <textarea id="add-content" rows = "10" cols = "60"></textarea>
+      <textarea id="add-content" rows = "10" cols = "60"></textarea><br>
       <input type="submit" value="Save" onclick="submitNote();">
     </form>
   </div>
@@ -169,25 +169,25 @@
 
 <dialog id="edit-dialog">
   <div class="edit-note">
+    <input id="edit-close" class="close-edit" type="button" name="close" value="Close"><br>
     <form action = "/edit" method = "post">
       <input type="button" name="star" value="Star">
-      <label for="edit-share" name="Share to" id="edit-share"> Share to :</label>
+      <label for="edit-share" name="Share to" id="edit-share" class="share-edit"> Share to :</label>
       <input type="text" name="share" placeholder="Username/Email">
-      <input type="button" name="close" value="Close">
       <br>
       <br>
       <br>
       <label for="edit-title"> Title</label>
-      <input type="text" name="title" id="edit-title" placeholder="Edit your title here">
-      <p style="display: inline-block;">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
+      <input type="text" name="title" id="edit-title" placeholder="Edit your title here"><br>
+      <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
       <p>Attached File : </p><div class="attachment"></div>
-      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();">
+      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
       <br>
       <br>
       <label for="edit-content">Contents:</label>
       <br>
       <br>
-      <textarea id="edit-content" rows = "10" cols = "60"></textarea>
+      <textarea id="edit-content" rows = "10" cols = "60"></textarea><br>
       <input type="submit" value="Save" onclick="submitNote();">
     </form>
   </div>
@@ -290,16 +290,16 @@
   };
 
   window.onload = function () {
-    var addOne = document.getElementById('addOne');
+    // var addOne = document.getElementById('addOne');
     var notesContener = document.getElementById('main-part');
     var addNoteDialog = document.getElementById('addNote');
 
 
-    $('#addOne').click(function (e) {
-      $('#addNoteDialog').dialog('open');
-      console.log('sss');
-      return false;
-    });
+    // $('#addOne').click(function (e) {
+    //   $('#addNoteDialog').dialog('open');
+    //   console.log('sss');
+    //   return false;
+    // });
 
     // addOne.addEventListener('click', function (e) {
     //   document.getElementById('main-part').hidden = true;
@@ -316,19 +316,19 @@
     //   // notesContener.appendChild(aNote);
     // });
 
-    var firstDialog = document.getElementById('edit-dialog');
+    var editDialog = document.getElementById('edit-dialog');
 
     $('#note1').click(function (e) {
       e.preventDefault();
-      console.log(this.getElementsByTagName('h3'));
-      $('#edit-title').value = this.getElementsByTagName('h3').innerText;
-      firstDialog.showModal();
-      console.log(firstDialog);
+      console.log(document.getElementById('note1-title').innerText);
+      document.getElementById('edit-title').value = document.getElementById('note1-title').innerText;
+      editDialog.showModal();
+      console.log(editDialog);
       console.log(this);
     });
 
-    $('#close-dialog').click(function () {
-      firstDialog.close();
+    $('#edit-close').click(function () {
+      editDialog.close();
     });
 
     var addDialog = document.getElementById('add-dialog');
@@ -342,8 +342,8 @@
       console.log(this);
     });
 
-    $('#close-dialog').click(function () {
-      firstDialog.close();
+    $('#add-close').click(function () {
+      addDialog.close();
     });
 
 

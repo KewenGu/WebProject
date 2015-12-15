@@ -69,3 +69,29 @@
 {
   /*border: solid;*/
 }
+dialog
+{
+  width: 800px;
+  height: 600px;
+}
+
+.close-edit
+{
+  float: right;
+}
+
+#popup-note .share-edit
+{
+  margin-left: 50%;
+}
+#popup-note .time-edit
+{
+  font-style: italic;
+  margin-left: 30%;
+}
+
+/*#popup-note .add-content
+{
+  font-family:"Times New Roman", Times, serif;
+  font-size: 25px;
+}*/
