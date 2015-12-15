@@ -80,14 +80,13 @@ dialog
   float: right;
 }
 
-#popup-note .share-edit
+.share-edit
 {
   margin-left: 50%;
 }
-#popup-note .time-edit
+.time-edit
 {
   font-style: italic;
-  margin-left: 30%;
 }
 
 /*#popup-note .add-content
@@ -95,3 +94,14 @@ dialog
   font-family:"Times New Roman", Times, serif;
   font-size: 25px;
 }*/
+
+.tmp-element {
+  visibility: hidden;
+  white-space: pre;
+}
+.edittitle {
+  border: 0;
+  padding: 2px;
+  background: #fff;
+  font: 12pt sans-serif;
+}

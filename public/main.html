@@ -95,48 +95,9 @@
       <h3 id="note1-title">Now led tedious shy lasting females off</h3>
       <p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>
     </div>
-    <div class="col-sm-4">
-      <h3>Now led tedious shy lasting females off</h3>
-      <p>An so vulgar to on points wanted. Not rapturous resolving continued household northward gay. He it otherwise supported instantly. Unfeeling agreeable suffering it on smallness newspaper be. So come must time no as. Do on unpleasing possession as of unreserved. Yet joy exquisite put sometimes enjoyment perpetual now. Behind lovers eat having length horses vanity say had its.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Now led tedious shy lasting females off</h3>
-      <p>Impossible considered invitation him men instrument saw celebrated unpleasant. Put rest and must set kind next many near nay. He exquisite continued explained middleton am. Voice hours young woody has she think equal. Estate moment he at on wonder at season little. Six garden result summer set family esteem nay estate. End admiration mrs unreserved discovered comparison especially invitation.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Now led tedious shy lasting females off</h3>
-      <p>Far concluded not his something extremity. Want four we face an he gate. On he of played he ladies answer little though nature. Blessing oh do pleasure as so formerly. Took four spot soon led size you. Outlived it received he material. Him yourself joy moderate off repeated laughter outweigh screened.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Now led tedious shy lasting females off</h3>
-      <p>Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Now led tedious shy lasting females off</h3>
-      <p>Bringing unlocked me an striking ye perceive. Mr by wound hours oh happy. Me in resolution pianoforte continuing we. Most my no spot felt by no. He he in forfeited furniture sweetness he arranging. Me tedious so to behaved written account ferrars moments. Too objection for elsewhere her preferred allowance her. Marianne shutters mr steepest to me. Up mr ignorant produced distance although is sociable blessing. Ham whom call all lain like.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Sudden looked elinor off gay estate nor silent</h3>
-      <p>Not far stuff she think the jokes. Going as by do known noise he wrote round leave. Warmly put branch people narrow see. Winding its waiting yet parlors married own feeling. Marry fruit do spite jokes an times. Whether at it unknown warrant herself winding if. Him same none name sake had post love. An busy feel form hand am up help. Parties it brother amongst an fortune of. Twenty behind wicket why age now itself ten.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Sudden looked elinor off gay estate nor silent</h3>
-      <p>Believing neglected so so allowance existence departure in. In design active temper be uneasy. Thirty for remove plenty regard you summer though. He preference connection astonished on of ye. Partiality on or continuing in particular principles as. Do believing oh disposing to supported allowance we.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Sudden looked elinor off gay estate nor silent</h3>
-      <p>Arrival entered an if drawing request. How daughters not promotion few knowledge contented. Yet winter law behind number stairs garret excuse. Minuter we natural conduct gravity if pointed oh no. Am immediate unwilling of attempted admitting disposing it. Handsome opinions on am at it ladyship.</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Sudden looked elinor off gay estate nor silent</h3>
-      <p>Pianoforte solicitude so decisively unpleasing conviction is partiality he. Or particular so diminution entreaties oh do. Real he me fond show gave shot plan. Mirth blush linen small hoped way its along. Resolution frequently apartments off all discretion devonshire. Saw sir fat spirit seeing valley. He looked or valley lively. If learn woody spoil of taken he cause.</p>
-    </div>
+
   </div>
-  <div id="addNote">
-    <form action="add" method="post">
-      <p><label for="title">Title: </label><input type="text" name="title" value=""></p>
-    </form>
-  </div>
+
 </div>
 </body>
 
@@ -144,25 +105,26 @@
 <dialog id="add-dialog">
   <div class="add-note">
     <input id="add-close" class="close-edit" type="button" name="close" value="Close"><br>
-    <form action = "/add" method = "post">
-      <input type="button" name="star" value="Star">
-      <label for="add-share" name = "Share to" id = "add-share" class="share-edit"> Share to :</label>
-      <input type="text" name="share" placeholder="Username/Email">
+    <form onsubmit="return false;">
+      <input type="checkbox" id="add-star" name="isStar" value="isStar"><label for="isStar">Star it</label>
+      <label for="add-share" class="share-edit"> Share to :</label>
+      <input type="text" id = "add-share" name="share" placeholder="Username/Email">
       <br>
       <br>
       <br>
       <label for="add-title"> Title</label>
       <input type="text" name="title" id="add-title" placeholder="Edit your title here"><br>
       <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
-      <p>Attached File : </p><div class="attachment"></div>
+      <p>Attached File : </p><div class="attachment"><input type="file" name="attachFile" value=""></div>
       <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
       <br>
       <br>
       <label for="add-content">Contents:</label>
       <br>
       <br>
-      <textarea id="add-content" rows = "10" cols = "60"></textarea><br>
-      <input type="submit" value="Save" onclick="submitNote();">
+      <textarea id="add-content" name="contents" rows = "10" cols = "60"></textarea><br>
+      <input type="submit" value="Save" onclick="addNote();">
+      <input type="reset" name="Reset" value="Reset">
     </form>
   </div>
 </dialog>
@@ -172,15 +134,15 @@
     <input id="edit-close" class="close-edit" type="button" name="close" value="Close"><br>
     <form action = "/edit" method = "post">
       <input type="button" name="star" value="Star">
-      <label for="edit-share" name="Share to" id="edit-share" class="share-edit"> Share to :</label>
+      <label for="edit-share" id="edit-share" class="share-edit"> Share to :</label>
       <input type="text" name="share" placeholder="Username/Email">
       <br>
       <br>
       <br>
       <label for="edit-title"> Title</label>
-      <input type="text" name="title" id="edit-title" placeholder="Edit your title here"><br>
+      <input type="text" name="title" id="edit-title" class="edittitle" placeholder="Edit your title here"><br>
       <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
-      <p>Attached File : </p><div class="attachment"></div>
+      <p>Attached File : </p><div class="attachment"><input type="file" name="attachFile" value=""></div>
       <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
       <br>
       <br>
@@ -194,6 +156,7 @@
 </dialog>
 
 <script type="text/javascript">
+  var username;
 
   function login() {
     var el1 = document.getElementById("login-username");
@@ -206,6 +169,8 @@
     req.onload = function () {
       makeGet('/status', notif);
     };
+    username = el1.value;
+    console.log(username);
     req.send('username=' + el1.value + '&password=' + el2.value);
   }
 
@@ -273,16 +238,6 @@
 
 
 
-
-
-
-  $('#addNoteDialog').dialog({
-    autoOpen: false,
-    title: 'Basic Dialog'
-  });
-
-
-
   var sample = {
     title: "It sportsman earnestly ye preserved an on",
     contents: "Too cultivated use solicitude frequently. Dashwood likewise up consider continue entrance ladyship oh. Wrong guest given purse power is no. Friendship to connection an am considered difficulty. Country met pursuit lasting moments why calling certain the. Middletons boisterous our way understood law. Among state cease how and sight since shall. Material did pleasure breeding our humanity she contempt had. So ye really mutual no cousin piqued summer result."
@@ -320,13 +275,13 @@
 
     $('#note1').click(function (e) {
       e.preventDefault();
-      console.log(document.getElementById('note1-title').innerText);
+      console.log(document.getElementById('add-content').innerText);
       document.getElementById('edit-title').value = document.getElementById('note1-title').innerText;
+      // document.getElementById('add-content').value = document.getElementById('note1-title').innerText;
       editDialog.showModal();
       console.log(editDialog);
       console.log(this);
     });
-
     $('#edit-close').click(function () {
       editDialog.close();
     });
@@ -335,19 +290,62 @@
 
     $('#add-one').click(function (e) {
       e.preventDefault();
-      console.log(this.getElementsByTagName('h3'));
-      $('#add-title').value = this.getElementsByTagName('h3').innerText;
+      // $('#add-title').value = this.getElementsByTagName('h3').innerText;
       addDialog.showModal();
-      console.log(addDialog);
-      console.log(this);
+      // console.log(addDialog);
+      // console.log(this);
     });
-
     $('#add-close').click(function () {
       addDialog.close();
     });
 
-
+    var inputEl = document.getElementById("note1-title");
+     function getWidthOfInput() {
+       var tmp = document.createElement("span");
+       tmp.className = "edittitle tmp-element";
+       tmp.innerHTML = inputEl.innerText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+       document.body.appendChild(tmp);
+       var theWidth = tmp.getBoundingClientRect().width;
+       document.body.removeChild(tmp);
+      console.log(theWidth);
+       return theWidth;
+     }
+     function adjustWidthOfInput() {
+       document.getElementById("edit-title").style.width = getWidthOfInput() + "px";
+     }
+     adjustWidthOfInput();
+     inputEl.onkeyup = adjustWidthOfInput;
 
   };
+
+  function addNote() {
+    var isStar = document.getElementById('add-star');
+    var share = document.getElementById('add-share');
+    var title = document.getElementById('add-title');
+    var contents = document.getElementById('add-content');
+
+    var reqp = new XMLHttpRequest();
+    reqp.open('POST', '/add', true);
+    reqp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    var query = "";
+    if(isStar.checked)
+      query += 'isStart=' +isStar.checked +'&';
+    query += 'share=' + share.value + '&';
+    query += 'title=' + title.value + '&';
+    query += 'contents=' + contents.value + '&';
+    query += 'username=' + username;
+    var sendStr = query.split(' ').join('+');
+    reqp.send(sendStr);
+    console.log(sendStr);
+
+    reqp.onreadystatechange = function () {
+      if(reqp.readyState == 4 && reqp.status == 200){
+        var resp = JSON.parse(reqp.responseText);
+        console.log(resp);
+        buildTable(resp);
+      }
+    }
+  }
 </script>
 </html>

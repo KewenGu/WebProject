@@ -118,25 +118,33 @@ app.post('/signup', urlencodedParser, function(req, res) {
 
 // post 传入 title, content, create_time, modify_time, is_starred, remind_info, attachment_path
 app.post('/add', urlencodedParser, function(req, res) {
+	console.log(req.body);
 	var note = {
 		id: id,
 		title: req.body.title,
-	  content: req.body.content,
-		create_time: req.body.create_time,
-	  modify_time: req.body.modify_time,
-	  is_starred: req.body.is_starred,
+	  contents: req.body.contents,
+		create_time: new Date(),
+	  //modify_time: req.body.modify_time,
+	  // is_starred: req.body.isStar,
 	  remind_info: req.body.remind_info,
 	  attachment_path: req.body.attachment_path
 	};
-	profile.forEach(function(user) {
+	if (req.body.isStar) {
+		note.isStar = true;
+	}
+	else {
+		note.isStar = false;
+	}
+	profiles.forEach(function(user) {
 		if (user.username === req.body.username) {
 			user.notes.push(note);
 		}
 	});
-
+	console.log(note);
+	console.log(profiles);
 	id++;
 	fs.writeFileSync("./public/res/profiles.json", JSON.stringify(profiles));
-
+	res.send(JSON.stringify(profiles));
 });
 
 // post 传入 id
