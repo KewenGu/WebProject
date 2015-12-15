@@ -152,7 +152,7 @@ app.post('/delete', urlencodedParser, function(req, res) {
 });
 
 // post 传入 id, title, content, create_time, modify_time, is_starred, remind_info, attachment_path
-app.post('/modify', urlencodedParser, function(req, res) {
+app.post('/edit', urlencodedParser, function(req, res) {
 	profile.forEach(function(user) {
 		user.notes.forEach(function(note) {
 			if (note.id === req.body.id) {

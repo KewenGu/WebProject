@@ -1,261 +1,353 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="css/main.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script type="text/JavaScript" src="http://underscorejs.org/underscore-min.js" ></script>
-    <script type="text/javascript" src="template.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script type="text/JavaScript" src="http://underscorejs.org/underscore-min.js" ></script>
+  <script type="text/javascript" src="template.js"></script>
+</head>
+<body>
 
+<div id="login-page" class="container">
+  <div class="row" id="forms">
+    <div class="forms col-sm-4">
+      <form>
+        <h3 class="header-note"><b>Login</b></h3>
+        <br>
+        <div class="form"><label for="login-username">User Name: </label><input type="text" id="login-username" class="textfield" required></div>
+        <br>
+        <div class="form"><label for="login-password">Password: </label><input type="password" id="login-password" class="textfield" required></div>
+        <br>
+        <div id="login-notif"></div>
+        <input type="submit" value="Login" class="button" onclick="login();">
+      </form>
+    </div>
+    <div class="forms col-lg-4">
+      <form>
+        <h3 class="header-note"><b>Sign Up</b></h3>
+        <br>
+        <div class="form"><label for="signup-username">User Name: </label><input type="text" id="signup-username" class="textfield" required></div>
+        <br>
+        <div class="form"><label for="signup-password">Password: </label><input type="password" id="signup-password" class="textfield" required></div>
+        <br>
+        <div class="form"><label for="signup-email">Email: </label><input type="email" id="signup-email" class="textfield" required></div>
+        <br>
+        <div id="signup-notif"></div>
+        <input type="submit" value="Sign Up" class="button" onclick="signup();">
+      </form>
+    </div>
+  </div>
+</div>
 
-    <div id="login-page" class="container">
-      <div class="row" id="forms">
-        <div class="forms col-sm-4">
-          <form>
-            <h3 class="header-note"><b>Login</b></h3>
-            <br>
-            <div class="form"><label for="login-username">User Name: </label><input type="text" id="login-username" class="textfield" required></div>
-            <br>
-            <div class="form"><label for="login-password">Password: </label><input type="password" id="login-password" class="textfield" required></div>
-            <br>
-            <div id="login-notif"></div>
-            <input type="submit" value="Login" class="button" onclick="login();">
-          </form>
+<div id="main-page" hidden>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+          <li><a href="#">Link</a></li>
+        </ul>
+        <!-- <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form> -->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Notification</a></li>
+          <li><a href="#">Sign out</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+      <div class="row">
+        <div class="col-sm-4">
+          Filter by:
+          <input type="search" name="filter" value="">
         </div>
-        <div class="forms col-lg-4">
-          <form>
-            <h3 class="header-note"><b>Sign Up</b></h3>
-            <br>
-            <div class="form"><label for="signup-username">User Name: </label><input type="text" id="signup-username" class="textfield" required></div>
-            <br>
-            <div class="form"><label for="signup-password">Password: </label><input type="password" id="signup-password" class="textfield" required></div>
-            <br>
-            <div class="form"><label for="signup-email">Email: </label><input type="email" id="signup-email" class="textfield" required></div>
-            <br>
-            <div id="signup-notif"></div>
-            <input type="submit" value="Sign Up" class="button" onclick="signup();">
-          </form>
+        <div class="col-sm-4">
+          Sort by:
+          <input type="search" name="sort" value="">
+        </div>
+        <div class="col-sm-4">
+          <button id="add-one"">
+            Add a new <span class="glyphicons glyphicons-plus"></span>
+          </button>
         </div>
       </div>
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div id="main-part" class="container">
+    <div class="col-sm-4" id="note1">
+      <h3>Now led tedious shy lasting females off</h3>
+      <p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>
     </div>
-
-
-
-    <div id="main-page" hidden>
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-
-            <a class="navbar-brand" href="#">Brand</a>
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-              <li><a href="#">Link</a></li>
-            </ul>
-            <!-- <form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-              </div>
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form> -->
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Notification</a></li>
-              <li><a href="#">Sign out</a></li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-          <div class="row">
-            <div class="col-sm-4">
-              Filter by:
-              <input type="search" name="filter" value="">
-            </div>
-            <div class="col-sm-4">
-              Sort by:
-              <input type="search" name="sort" value="">
-            </div>
-            <div class="col-sm-4">
-              <p id="addOne">
-                Add new one<span class="glyphicons glyphicons-plus"></span>
-              </p>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </nav>
-      <div id="main-part" class="container">
-        <div class="col-sm-4" id="note1">
-          <h3>Now led tedious shy lasting females off</h3>
-          <p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>
-          <p>Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper up he it enjoyment agreeable depending. Timed voice share led his widen noisy young. On weddings believed laughing although material do exercise of. Up attempt offered ye civilly so sitting to. She new course get living within elinor joy. She her rapturous suffering concealed.</p>
-        </div>
-        <dialog id="popup-note">
-          <p>Hi, I'm a dialog!</p>
-          <button class="close">Okay</button>
-        </dialog>
-        <div class="col-sm-4">
-          <h3>Now led tedious shy lasting females off</h3>
-          <p>An so vulgar to on points wanted. Not rapturous resolving continued household northward gay. He it otherwise supported instantly. Unfeeling agreeable suffering it on smallness newspaper be. So come must time no as. Do on unpleasing possession as of unreserved. Yet joy exquisite put sometimes enjoyment perpetual now. Behind lovers eat having length horses vanity say had its.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Now led tedious shy lasting females off</h3>
-          <p>Impossible considered invitation him men instrument saw celebrated unpleasant. Put rest and must set kind next many near nay. He exquisite continued explained middleton am. Voice hours young woody has she think equal. Estate moment he at on wonder at season little. Six garden result summer set family esteem nay estate. End admiration mrs unreserved discovered comparison especially invitation.</p>
-          <p>An an valley indeed so no wonder future nature vanity. Debating all she mistaken indulged believed provided declared. He many kept on draw lain song as same. Whether at dearest certain spirits is entered in to. Rich fine bred real use too many good. She compliment unaffected expression favourable any. Unknown chiefly showing to conduct no. Hung as love evil able to post at as.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Now led tedious shy lasting females off</h3>
-          <p>Far concluded not his something extremity. Want four we face an he gate. On he of played he ladies answer little though nature. Blessing oh do pleasure as so formerly. Took four spot soon led size you. Outlived it received he material. Him yourself joy moderate off repeated laughter outweigh screened.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Now led tedious shy lasting females off</h3>
-          <p>Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Now led tedious shy lasting females off</h3>
-          <p>Bringing unlocked me an striking ye perceive. Mr by wound hours oh happy. Me in resolution pianoforte continuing we. Most my no spot felt by no. He he in forfeited furniture sweetness he arranging. Me tedious so to behaved written account ferrars moments. Too objection for elsewhere her preferred allowance her. Marianne shutters mr steepest to me. Up mr ignorant produced distance although is sociable blessing. Ham whom call all lain like.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Sudden looked elinor off gay estate nor silent</h3>
-          <p>Not far stuff she think the jokes. Going as by do known noise he wrote round leave. Warmly put branch people narrow see. Winding its waiting yet parlors married own feeling. Marry fruit do spite jokes an times. Whether at it unknown warrant herself winding if. Him same none name sake had post love. An busy feel form hand am up help. Parties it brother amongst an fortune of. Twenty behind wicket why age now itself ten.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Sudden looked elinor off gay estate nor silent</h3>
-          <p>Believing neglected so so allowance existence departure in. In design active temper be uneasy. Thirty for remove plenty regard you summer though. He preference connection astonished on of ye. Partiality on or continuing in particular principles as. Do believing oh disposing to supported allowance we.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Sudden looked elinor off gay estate nor silent</h3>
-          <p>Arrival entered an if drawing request. How daughters not promotion few knowledge contented. Yet winter law behind number stairs garret excuse. Minuter we natural conduct gravity if pointed oh no. Am immediate unwilling of attempted admitting disposing it. Handsome opinions on am at it ladyship.</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Sudden looked elinor off gay estate nor silent</h3>
-          <p>Pianoforte solicitude so decisively unpleasing conviction is partiality he. Or particular so diminution entreaties oh do. Real he me fond show gave shot plan. Mirth blush linen small hoped way its along. Resolution frequently apartments off all discretion devonshire. Saw sir fat spirit seeing valley. He looked or valley lively. If learn woody spoil of taken he cause.</p>
-          <p>Name were we at hope. Remainder household direction zealously the unwilling bed sex. Lose and gay ham sake met that. Stood her place one ten spoke yet. Head case knew ever set why over. Marianne returned of peculiar replying in moderate. Roused get enable garret estate old county. Entreaties you devonshire law dissimilar terminated.</p>
-        </div>
-      </div>
+    <div class="col-sm-4">
+      <h3>Now led tedious shy lasting females off</h3>
+      <p>An so vulgar to on points wanted. Not rapturous resolving continued household northward gay. He it otherwise supported instantly. Unfeeling agreeable suffering it on smallness newspaper be. So come must time no as. Do on unpleasing possession as of unreserved. Yet joy exquisite put sometimes enjoyment perpetual now. Behind lovers eat having length horses vanity say had its.</p>
     </div>
-  </body>
+    <div class="col-sm-4">
+      <h3>Now led tedious shy lasting females off</h3>
+      <p>Impossible considered invitation him men instrument saw celebrated unpleasant. Put rest and must set kind next many near nay. He exquisite continued explained middleton am. Voice hours young woody has she think equal. Estate moment he at on wonder at season little. Six garden result summer set family esteem nay estate. End admiration mrs unreserved discovered comparison especially invitation.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Now led tedious shy lasting females off</h3>
+      <p>Far concluded not his something extremity. Want four we face an he gate. On he of played he ladies answer little though nature. Blessing oh do pleasure as so formerly. Took four spot soon led size you. Outlived it received he material. Him yourself joy moderate off repeated laughter outweigh screened.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Now led tedious shy lasting females off</h3>
+      <p>Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Now led tedious shy lasting females off</h3>
+      <p>Bringing unlocked me an striking ye perceive. Mr by wound hours oh happy. Me in resolution pianoforte continuing we. Most my no spot felt by no. He he in forfeited furniture sweetness he arranging. Me tedious so to behaved written account ferrars moments. Too objection for elsewhere her preferred allowance her. Marianne shutters mr steepest to me. Up mr ignorant produced distance although is sociable blessing. Ham whom call all lain like.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Sudden looked elinor off gay estate nor silent</h3>
+      <p>Not far stuff she think the jokes. Going as by do known noise he wrote round leave. Warmly put branch people narrow see. Winding its waiting yet parlors married own feeling. Marry fruit do spite jokes an times. Whether at it unknown warrant herself winding if. Him same none name sake had post love. An busy feel form hand am up help. Parties it brother amongst an fortune of. Twenty behind wicket why age now itself ten.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Sudden looked elinor off gay estate nor silent</h3>
+      <p>Believing neglected so so allowance existence departure in. In design active temper be uneasy. Thirty for remove plenty regard you summer though. He preference connection astonished on of ye. Partiality on or continuing in particular principles as. Do believing oh disposing to supported allowance we.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Sudden looked elinor off gay estate nor silent</h3>
+      <p>Arrival entered an if drawing request. How daughters not promotion few knowledge contented. Yet winter law behind number stairs garret excuse. Minuter we natural conduct gravity if pointed oh no. Am immediate unwilling of attempted admitting disposing it. Handsome opinions on am at it ladyship.</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Sudden looked elinor off gay estate nor silent</h3>
+      <p>Pianoforte solicitude so decisively unpleasing conviction is partiality he. Or particular so diminution entreaties oh do. Real he me fond show gave shot plan. Mirth blush linen small hoped way its along. Resolution frequently apartments off all discretion devonshire. Saw sir fat spirit seeing valley. He looked or valley lively. If learn woody spoil of taken he cause.</p>
+    </div>
+  </div>
+  <div id="addNote">
+    <form action="add" method="post">
+      <p><label for="title">Title: </label><input type="text" name="title" value=""></p>
+    </form>
+  </div>
+</div>
+</body>
 
-  <script type="text/javascript">
+
+<dialog id="add-dialog">
+  <div class="add-note">
+    <form action = "/add" method = "post">
+      <input type="button" name="star" value="Star">
+      <label for="add-share" name = "Share to" id = "add-share"> Share to :</label>
+      <input type="text" name="share" placeholder="Username/Email">
+      <input type="button" name="close" value="Close">
+      <br>
+      <br>
+      <br>
+      <label for="add-title"> Title</label>
+      <input type="text" name="title" id="add-title" placeholder="Edit your title here">
+      <p style="display: inline-block;">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
+      <p>Attached File : </p><div class="attachment"></div>
+      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();">
+      <br>
+      <br>
+      <label for="add-content">Contents:</label>
+      <br>
+      <br>
+      <textarea id="add-content" rows = "10" cols = "60"></textarea>
+      <input type="submit" value="Save" onclick="submitNote();">
+    </form>
+  </div>
+</dialog>
+
+<dialog id="edit-dialog">
+  <div class="edit-note">
+    <form action = "/edit" method = "post">
+      <input type="button" name="star" value="Star">
+      <label for="edit-share" name="Share to" id="edit-share"> Share to :</label>
+      <input type="text" name="share" placeholder="Username/Email">
+      <input type="button" name="close" value="Close">
+      <br>
+      <br>
+      <br>
+      <label for="edit-title"> Title</label>
+      <input type="text" name="title" id="edit-title" placeholder="Edit your title here">
+      <p style="display: inline-block;">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
+      <p>Attached File : </p><div class="attachment"></div>
+      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();">
+      <br>
+      <br>
+      <label for="edit-content">Contents:</label>
+      <br>
+      <br>
+      <textarea id="edit-content" rows = "10" cols = "60"></textarea>
+      <input type="submit" value="Save" onclick="submitNote();">
+    </form>
+  </div>
+</dialog>
+
+<script type="text/javascript">
+
+  function login() {
+    var el1 = document.getElementById("login-username");
+    var el2 = document.getElementById("login-password");
+
+    var req = new XMLHttpRequest();
+    req.open('POST', '/login', true);
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    req.onload = function () {
+      makeGet('/status', notif);
+    };
+    req.send('username=' + el1.value + '&password=' + el2.value);
+  }
+
+  function signup() {
+    var el1 = document.getElementById("signup-username");
+    var el2 = document.getElementById("signup-password");
+    var el3 = document.getElementById("signup-email");
+
+    var req = new XMLHttpRequest();
+    req.open('POST', '/signup', true);
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    req.onload = function () {
+      makeGet('/status', notif);
+    };
+    req.send('username=' + el1.value + '&password=' + el2.value + '&email=' + el3.value);
+
+  }
 
 
-    function login() {
-      var el1 = document.getElementById("login-username");
-      var el2 = document.getElementById("login-password");
 
-      var req = new XMLHttpRequest();
-      req.open('POST', '/login', true);
-      req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      req.onload = function () {
-        makeGet('/status', notif);
-      };
-      req.send('username=' + el1.value + '&password=' + el2.value);
-    }
-
-    function signup() {
-      var el1 = document.getElementById("signup-username");
-      var el2 = document.getElementById("signup-password");
-      var el3 = document.getElementById("signup-email");
-
-      var req = new XMLHttpRequest();
-      req.open('POST', '/signup', true);
-      req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-      req.onload = function () {
-        makeGet('/status', notif);
-      };
-      req.send('username=' + el1.value + '&password=' + el2.value + '&email=' + el3.value);
-
-    }
+  makeGet('/login', "#login-notif");
+  makeGet('/signup', "#signup-notif");
 
 
+  function makeGet(url, id) {
+    var req = new XMLHttpRequest();
 
-    makeGet('/login', "#login-notif");
-    makeGet('/signup', "#signup-notif");
+    req.onreadystatechange = function() {
+      handleRes(req, id);
+    };
 
+    req.open('GET', url);
+    req.send();
+  }
 
-    function makeGet(url, id) {
-      var req = new XMLHttpRequest();
+  function handleRes(req, id) {
+    if( req.readyState !== XMLHttpRequest.DONE )
+      return;
 
-      req.onreadystatechange = function() {
-        handleRes(req, id);
-      };
-
-      req.open('GET', url);
-      req.send();
-    }
-
-    function handleRes(req, id) {
-      if( req.readyState !== XMLHttpRequest.DONE )
-        return;
-
-      if(req.status === 200) {
-        console.log(id);
-        console.log(req.responseText);
-        if (id === "#login-notif" && req.responseText === "Done") {
-          console.log("proceed into main page");
-          document.getElementById("login-page").hidden = true;
-          document.getElementById("main-page").hidden = false;
-
-        }
-        else if (id === "#signup-notif" && req.responseText === "Done") {
-          document.querySelector(id).innerText = "Your account has been created!";
-        }
-        else {
-          document.querySelector(id).innerText = req.responseText;
-        }
+    if(req.status === 200) {
+      console.log(id);
+      console.log(req.responseText);
+      if (id === "#login-notif" && req.responseText === "Done") {
+        console.log("proceed into main page");
+        document.getElementById("login-page").hidden = true;
+        document.getElementById("main-page").hidden = false;
 
       }
+      else if (id === "#signup-notif" && req.responseText === "Done") {
+        document.querySelector(id).innerText = "Your account has been created!";
+      }
+      else {
+        document.querySelector(id).innerText = req.responseText;
+      }
+
     }
+  }
 
-    function validateEmail(email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    }
-
-
-
-
-
-
-    var sample = {
-      title: "It sportsman earnestly ye preserved an on",
-      contents: "Too cultivated use solicitude frequently. Dashwood likewise up consider continue entrance ladyship oh. Wrong guest given purse power is no. Friendship to connection an am considered difficulty. Country met pursuit lasting moments why calling certain the. Middletons boisterous our way understood law. Among state cease how and sight since shall. Material did pleasure breeding our humanity she contempt had. So ye really mutual no cousin piqued summer result."
-      // createdTime:
-    };
-
-    window.onload = function () {
-      var addOne = document.getElementById('addOne');
-      var notesContener = document.getElementById('main-part');
-
-      addOne.addEventListener('click', function () {
-        var aNote = document.createElement("div");
-        aNote.setAttribute("class", "col-sm-4");
-        sample.createdTime = new Date();
-        aNote.innerHTML = noteTemplate(sample);
-        notesContener.appendChild(aNote);
-      });
-
-      var firstNote = document.getElementById('note1');
-      var firstDialog = document.getElementById('popup-note');
-
-      firstNote.addEventListener('click', function (e) {
-        e.preventDefault();
-        firstDialog.show();
-
-        console.log(this);
-      });
+  function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
 
 
 
 
-    };
-  </script>
+
+
+
+  $('#addNoteDialog').dialog({
+    autoOpen: false,
+    title: 'Basic Dialog'
+  });
+
+
+
+  var sample = {
+    title: "It sportsman earnestly ye preserved an on",
+    contents: "Too cultivated use solicitude frequently. Dashwood likewise up consider continue entrance ladyship oh. Wrong guest given purse power is no. Friendship to connection an am considered difficulty. Country met pursuit lasting moments why calling certain the. Middletons boisterous our way understood law. Among state cease how and sight since shall. Material did pleasure breeding our humanity she contempt had. So ye really mutual no cousin piqued summer result."
+    // createdTime:
+  };
+
+  window.onload = function () {
+    var addOne = document.getElementById('addOne');
+    var notesContener = document.getElementById('main-part');
+    var addNoteDialog = document.getElementById('addNote');
+
+
+    $('#addOne').click(function (e) {
+      $('#addNoteDialog').dialog('open');
+      console.log('sss');
+      return false;
+    });
+
+    // addOne.addEventListener('click', function (e) {
+    //   document.getElementById('main-part').hidden = true;
+    //
+    //   // show up the dialog
+    //   e.preventDefault();
+    //   addNoteDialog.show();
+    //
+    //   // TODO following code for save add note
+    //   // var aNote = document.createElement("div");
+    //   // aNote.setAttribute("class", "col-sm-4");
+    //   // sample.createdTime = new Date();
+    //   // aNote.innerHTML = noteTemplate(sample);
+    //   // notesContener.appendChild(aNote);
+    // });
+
+    var firstDialog = document.getElementById('edit-dialog');
+
+    $('#note1').click(function (e) {
+      e.preventDefault();
+      console.log(this.getElementsByTagName('h3'));
+      $('#edit-title').value = this.getElementsByTagName('h3').innerText;
+      firstDialog.showModal();
+      console.log(firstDialog);
+      console.log(this);
+    });
+
+    $('#close-dialog').click(function () {
+      firstDialog.close();
+    });
+
+    var addDialog = document.getElementById('add-dialog');
+
+    $('#add-one').click(function (e) {
+      e.preventDefault();
+      console.log(this.getElementsByTagName('h3'));
+      $('#add-title').value = this.getElementsByTagName('h3').innerText;
+      addDialog.showModal();
+      console.log(addDialog);
+      console.log(this);
+    });
+
+    $('#close-dialog').click(function () {
+      firstDialog.close();
+    });
+
+
+
+  };
+</script>
 </html>
