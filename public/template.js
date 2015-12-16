@@ -1,7 +1,7 @@
 var noteTemplate_notStarred = _.template(
   "<p class='note-id' hidden><%= id %></p>" +
-  "<h3><%= title %></h3>" +
-  "<p>Create Time: <p class='note-create-time'><%= create_time %></p></p>" +
+  "<p class='note-title'><%= title %></p>" +
+  "<p>Create Time: <span class='note-create-time'><%= create_time %></span></p>" +
   // "<p>Modified Time: <%= modify_time %></p>" +
   // "<p>Reminder: <%= remind_info %></p>" +
   // "<p>Attachment: <%= attachment_path %></p>" +
@@ -12,8 +12,8 @@ var noteTemplate_notStarred = _.template(
 
 var noteTemplate_starred = _.template(
   "<p class='note-id' hidden><%= id %></p>" +
-  "<h3><%= title %></h3>" +
-  "<p>Create Time: <p class='note-create-time'><%= create_time %></p></p>" +
+  "<p class='note-title'><%= title %></p>" +
+  "<p>Create Time: <span class='note-create-time'><%= create_time %></span></p>" +
   // "<p>Modified Time: <%= modify_time %></p>" +
   // "<p>Reminder: <%= remind_info %></p>" +
   // "<p>Attachment: <%= attachment_path %></p>" +

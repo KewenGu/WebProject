@@ -11,7 +11,14 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="http://isotope.metafizzy.co/isotope.pkgd.js"></script>
+  <script src="https://rawgit.com/metafizzy/isotope-cells-by-column/master/cells-by-column.js"></script>
+  <script src="https://rawgit.com/metafizzy/isotope-cells-by-row/master/cells-by-row.js"></script>
+  <script src="https://rawgit.com/metafizzy/isotope-fit-columns/master/fit-columns.js"></script>
+  <script src="https://rawgit.com/metafizzy/isotope-horizontal/master/horizontal.js"></script>
+  <script src="https://rawgit.com/metafizzy/isotope-masonry-horizontal/master/masonry-horizontal.js"></script>
+  <script src="https://rawgit.com/metafizzy/isotope-packery/master/packery-mode.pkgd.js"></script>
   <script type="text/JavaScript" src="http://underscorejs.org/underscore-min.js" ></script>
   <script type="text/javascript" src="template.js"></script>
 </head>
@@ -90,8 +97,29 @@
         </div>
       </div>
     </div><!-- /.container-fluid -->
+    <div class="button-group layout-mode-button-group">
+      <button class="button is-checked" data-layout-mode="masonry" checked="checked">masonry</button>
+      <button class="button" data-layout-mode="fitRows">fitRows</button>
+      <button class="button" data-layout-mode="cellsByRow">cellsByRow</button>
+      <button class="button" data-layout-mode="vertical">vertical</button>
+      <button class="button" data-layout-mode="packery">packery</button>
+      <button class="button" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</button>
+      <button class="button" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</button>
+      <button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true">cellsByColumn</button>
+      <button class="button" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</button>
+    </div>
+    <br>
+    <div class="button-group sort-by-button-group">
+      <button class="button" data-sort-value="title">Title</button>
+      <button class="button" data-sort-value="create_time">Create Time</button>
+      <button class="button" data-sort-value="modify_time">Last Modify Time</button>
+    </div>
+    <button class="shuffle-button" >Shuffle</button>
+
   </nav>
+
   <div id="main-part" class="grid">
+
     <div class="col-sm-4" id="note1">
       <h3 id="note1-title">Now led tedious shy lasting females off</h3>
       <p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>
@@ -107,7 +135,7 @@
   <div class="add-note">
     <input id="add-close" class="close-edit" type="button" name="close" value="Close"><br>
     <form onsubmit="return false;">
-      <input type="checkbox" id="add-star" name="isStar" value="isStar"><label for="isStar">Star it</label>
+      <input type="checkbox" id="add-star" name="isStar" value="isStar"><label for="add-star">Star it</label>
       <label for="add-share" class="share-edit"> Share to :</label>
       <input type="text" id = "add-share" name="share" placeholder="Username/Email">
       <br>
@@ -135,7 +163,7 @@
     <p id="edit-id" hidden></p>
     <input id="edit-close" class="close-edit" type="button" name="close" value="Close"><br>
     <form onsubmit="return false;">
-      <input type="checkbox" id="edit-star" name="isStar" value="isStar"><label for="isStar">Star it</label>
+      <input type="checkbox" id="edit-star" name="isStar" value="isStar"><label for="edit-star">Star it</label>
       <label for="edit-share" id="edit-share" class="share-edit"> Share to :</label>
       <input type="text" name="share" placeholder="Username/Email">
       <br>
@@ -339,7 +367,7 @@
         console.log(resp);
         buildTable(resp);
       }
-    }
+    };
     document.getElementById('add-dialog').close();
 
   }
@@ -363,7 +391,7 @@
         console.log(resp);
         buildTable(resp);
       }
-    }
+    };
     document.getElementById('edit-dialog').close();
   }
   function editNote() {
@@ -444,28 +472,88 @@
   }
 </script>
 <script type="text/javascript">
-$(document).ready( function() {
+  // external js: isotope.pkgd.js, cells-by-column.js, cells-by-row.js, fit-columns.js, horizontal.js, masonry-horizontal.js
 
-  $('.grid').isotope({
-    itemSelector: '.grid-item',
-    layoutMode: 'masonry',
-    masonry: {
-      columnWidth: 110
-    },
-    cellsByRow: {
-      columnWidth: 220,
-      rowHeight: 220
-    },
-    masonryHorizontal: {
-      rowHeight: 110
-    },
-    cellsByColumn: {
-      columnWidth: 220,
-      rowHeight: 220
-    }
+  $(document).ready(function() {
+    // init Isotope
+    var $grid = $('.grid').isotope({
+      itemSelector: '.grid-item',
+      layoutMode: 'masonry',
+      getSortData: {
+        title: '.note-title',
+        create_time: '.note-create-time',
+        modify_time: '.note-modify-time'
+      },
+      sortBy: 'title',
+      masonry: {
+        columnWidth: 110
+      },
+      cellsByRow: {
+        columnWidth: 220,
+        rowHeight: 220
+      },
+      masonryHorizontal: {
+        rowHeight: 110
+      },
+      cellsByColumn: {
+        columnWidth: 220,
+        rowHeight: 220
+      }
+    });
+
+    var isHorizontal = false;
+    var $window = $(window);
+
+    $('.layout-mode-button-group').on('click', 'button', function() {
+      // adjust container sizing if layout mode is changing from vertical or horizontal
+      var $this = $(this);
+      var isHorizontalMode = !!$this.attr('data-is-horizontal');
+      if (isHorizontal !== isHorizontalMode) {
+        // change container size if horiz/vert change
+        var containerStyle = isHorizontalMode ? {
+          height: $window.height() * 0.7
+        } : {
+          width: 'auto'
+        };
+        $grid.css(containerStyle);
+        isHorizontal = isHorizontalMode;
+      }
+      // change layout mode
+      var layoutModeValue = $this.attr('data-layout-mode');
+      console.log(layoutModeValue);
+      $grid.isotope({
+        layoutMode: layoutModeValue
+      });
+    });
+
+
+    // bind sort button click
+    $('.sort-by-button-group').on( 'click', 'button', function() {
+      var sortValue = $(this).attr('data-sort-value');
+      console.log(sortValue);
+      $grid.isotope({ sortBy: sortValue });
+      //$grid.isotope('updateSortData').isotope();
+      $grid.isotope('reloadItems');
+    });
+
+
+    // change is-checked class on buttons
+    $('.button-group').each(function(i, buttonGroup) {
+      var $buttonGroup = $(buttonGroup);
+      $buttonGroup.on('click', 'button', function() {
+        $buttonGroup.find('.is-checked').removeClass('is-checked');
+        $(this).addClass('is-checked');
+      });
+    });
+
+    $('.shuffle-button').on( 'click', function() {
+      console.log("shuffle");
+      $grid.isotope('shuffle');
+      $grid.isotope('reloadItems')
+    });
+
+
   });
-
-});
 </script>
 <script type="text/javascript" src="dragNdrop.js"></script>
 </html>
