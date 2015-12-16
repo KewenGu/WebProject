@@ -105,3 +105,15 @@ dialog
   background: #fff;
   font: 12pt sans-serif;
 }
+.grid {
+  background: #DDD;
+  max-width: 1200px;
+}
+.grid-item {
+  float: left;
+  /*width: 100px;*/
+  /*height: 100px;*/
+  background: #0D8;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.7);
+}
