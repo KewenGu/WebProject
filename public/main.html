@@ -15,7 +15,7 @@
   <script type="text/javascript" src="template.js"></script>
 </head>
 <body>
-
+<div id="username" hidden></div>
 <div id="login-page" class="container">
   <div class="row" id="forms">
     <div class="forms col-sm-4">
@@ -114,7 +114,7 @@
       <br>
       <label for="add-title"> Title</label>
       <input type="text" name="title" id="add-title" placeholder="Edit your title here"><br>
-      <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
+      <!-- <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p> -->
       <p>Attached File : </p><div class="attachment"><input type="file" name="attachFile" value=""></div>
       <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
       <br>
@@ -123,7 +123,7 @@
       <br>
       <br>
       <textarea id="add-content" name="contents" rows = "10" cols = "60"></textarea><br>
-      <input type="submit" value="Save" onclick="addNote();">
+      <input type="button" value="Save" onclick="addNote();">
       <input type="reset" name="Reset" value="Reset">
     </form>
   </div>
@@ -131,9 +131,10 @@
 
 <dialog id="edit-dialog">
   <div class="edit-note">
+    <p id="edit-id" hidden></p>
     <input id="edit-close" class="close-edit" type="button" name="close" value="Close"><br>
-    <form action = "/edit" method = "post">
-      <input type="button" name="star" value="Star">
+    <form onsubmit="return false;">
+      <input type="checkbox" id="edit-star" name="isStar" value="isStar"><label for="isStar">Star it</label>
       <label for="edit-share" id="edit-share" class="share-edit"> Share to :</label>
       <input type="text" name="share" placeholder="Username/Email">
       <br>
@@ -142,6 +143,7 @@
       <label for="edit-title"> Title</label>
       <input type="text" name="title" id="edit-title" class="edittitle" placeholder="Edit your title here"><br>
       <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
+      <p style="display: inline-block;" class="time-edit">Created time:&nbsp;<p style="display: inline-block;" id="edit-create-time">December 10th 2:36PM </p></p>
       <p>Attached File : </p><div class="attachment"><input type="file" name="attachFile" value=""></div>
       <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
       <br>
@@ -150,27 +152,30 @@
       <br>
       <br>
       <textarea id="edit-content" rows = "10" cols = "60"></textarea><br>
-      <input type="submit" value="Save" onclick="submitNote();">
     </form>
+    <input type="button" value="Save" onclick="editNote();">
+    <input type="button" value="Delete" onclick="deleteNote();">
   </div>
 </dialog>
 
 <script type="text/javascript">
   var username;
-
+  var notif;
   function login() {
     var el1 = document.getElementById("login-username");
     var el2 = document.getElementById("login-password");
 
+    username = el1.value;
+    console.log(username);
     var req = new XMLHttpRequest();
     req.open('POST', '/login', true);
     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
+
     req.onload = function () {
+      notif = '#login-notif';
       makeGet('/status', notif);
     };
-    username = el1.value;
-    console.log(username);
     req.send('username=' + el1.value + '&password=' + el2.value);
   }
 
@@ -184,6 +189,7 @@
     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     req.onload = function () {
+      notif = '#signup-notif';
       makeGet('/status', notif);
     };
     req.send('username=' + el1.value + '&password=' + el2.value + '&email=' + el3.value);
@@ -213,20 +219,25 @@
 
     if(req.status === 200) {
       console.log(id);
-      console.log(req.responseText);
-      if (id === "#login-notif" && req.responseText === "Done") {
+      // console.log(req.responseText);
+      var temp = req.responseText.split('&');
+      if (id === "#login-notif" && temp[0] === "Done") {
+        console.log(temp[1]);
+        var user = JSON.parse(temp[1]);
         console.log("proceed into main page");
         document.getElementById("login-page").hidden = true;
         document.getElementById("main-page").hidden = false;
-
+        document.getElementById('username').innerText = user.username;
+        console.log(user.username);
+        // console.log(document.getElementById('username').innerText);
+        buildTable(user);
       }
-      else if (id === "#signup-notif" && req.responseText === "Done") {
+      else if (id === "#signup-notif" && temp[0] === "Done") {
         document.querySelector(id).innerText = "Your account has been created!";
       }
       else {
-        document.querySelector(id).innerText = req.responseText;
+        document.querySelector(id).innerText = temp[0];
       }
-
     }
   }
 
@@ -249,33 +260,10 @@
     var notesContener = document.getElementById('main-part');
     var addNoteDialog = document.getElementById('addNote');
 
-
-    // $('#addOne').click(function (e) {
-    //   $('#addNoteDialog').dialog('open');
-    //   console.log('sss');
-    //   return false;
-    // });
-
-    // addOne.addEventListener('click', function (e) {
-    //   document.getElementById('main-part').hidden = true;
-    //
-    //   // show up the dialog
-    //   e.preventDefault();
-    //   addNoteDialog.show();
-    //
-    //   // TODO following code for save add note
-    //   // var aNote = document.createElement("div");
-    //   // aNote.setAttribute("class", "col-sm-4");
-    //   // sample.createdTime = new Date();
-    //   // aNote.innerHTML = noteTemplate(sample);
-    //   // notesContener.appendChild(aNote);
-    // });
-
     var editDialog = document.getElementById('edit-dialog');
 
     $('#note1').click(function (e) {
       e.preventDefault();
-      console.log(document.getElementById('add-content').innerText);
       document.getElementById('edit-title').value = document.getElementById('note1-title').innerText;
       // document.getElementById('add-content').value = document.getElementById('note1-title').innerText;
       editDialog.showModal();
@@ -296,6 +284,11 @@
       // console.log(this);
     });
     $('#add-close').click(function () {
+
+      // $('#add-star').attr('checked', false);
+      // $('#add-title').removeAttr('value');
+      // $('#add-content').removeAttr('value');
+
       addDialog.close();
     });
 
@@ -330,11 +323,11 @@
 
     var query = "";
     if(isStar.checked)
-      query += 'isStart=' +isStar.checked +'&';
+      query += 'isStar=' +isStar.checked +'&';
     query += 'share=' + share.value + '&';
     query += 'title=' + title.value + '&';
     query += 'contents=' + contents.value + '&';
-    query += 'username=' + username;
+    query += 'username=' + document.getElementById('username').innerText;
     var sendStr = query.split(' ').join('+');
     reqp.send(sendStr);
     console.log(sendStr);
@@ -345,6 +338,100 @@
         console.log(resp);
         buildTable(resp);
       }
+    }
+    document.getElementById('add-dialog').close();
+
+  }
+  function deleteNote() {
+    // console.log('delete');
+    var id = document.getElementById('edit-id');
+
+    var reqp = new XMLHttpRequest();
+    reqp.open('POST', '/delete', true);
+    reqp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    var query = "";
+    query += 'username=' + document.getElementById('username').innerText + '&';
+    query += 'id=' + id.innerText;
+    reqp.send(query);
+    console.log(query);
+
+    reqp.onreadystatechange = function () {
+      if(reqp.readyState == 4 && reqp.status == 200){
+        var resp = JSON.parse(reqp.responseText);
+        console.log(resp);
+        buildTable(resp);
+      }
+    }
+    document.getElementById('edit-dialog').close();
+  }
+  function editNote() {
+    var id = document.getElementById('edit-id');
+    var isStar = document.getElementById('edit-star');
+    // var share = document.getElementById('edit-share');
+    var title = document.getElementById('edit-title');
+    var contents = document.getElementById('edit-content');
+
+    var reqp = new XMLHttpRequest();
+    reqp.open('POST', '/edit', true);
+    reqp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    var query = "";
+    if(isStar.checked)
+      query += 'isStar=' + isStar.checked +'&';
+    query += 'title=' + title.value + '&';
+    query += 'contents=' + contents.value + '&';
+    query += 'username=' + document.getElementById('username').innerText + '&';
+    query += 'id=' + id.innerText;
+    var sendStr = query.split(' ').join('+');
+    reqp.send(sendStr);
+    console.log(sendStr);
+
+    reqp.onreadystatechange = function () {
+      if(reqp.readyState == 4 && reqp.status == 200){
+        var resp = JSON.parse(reqp.responseText);
+        console.log(resp);
+        buildTable(resp);
+      }
+    }
+    document.getElementById('edit-dialog').close();
+  }
+  function buildTable(user) {
+    var mainPart = document.getElementById('main-part');
+    mainPart.innerHTML = '';
+    var tempNote;
+
+    user.notes.forEach(function (note) {
+      // console.log(note);
+      tempNote = document.createElement('div');
+      tempNote.setAttribute("class", "col-sm-4");
+      if(note.isStar){
+        tempNote.innerHTML = noteTemplate_notStarred(note);
+      }
+      else {
+        tempNote.innerHTML = noteTemplate_starred(note);
+      }
+      mainPart.appendChild(tempNote);
+
+      var editDialog = document.getElementById('edit-dialog');
+      tempNote.addEventListener('click', function (e) {
+        e.preventDefault();
+        // console.log(this);
+        document.getElementById('edit-title').value = this.querySelector('h3').innerText;
+        document.getElementById('edit-create-time').innerText = this.querySelector('.note-create-time').innerText;
+        document.getElementById('edit-content').value = this.querySelector('.note-content').innerText;
+        // console.log(document.getElementById('edit-content').value);
+        document.getElementById('edit-id').innerText = this.querySelector('.note-id').innerText;
+        editDialog.showModal();
+        // console.log(editDialog);
+
+      });
+
+    });
+    if(user.notes.length==0){
+      tempNote = document.createElement('div');
+      tempNote.innerHTML = "<h1>You are new here.</h1>";
+      mainPart.appendChild(tempNote);
     }
   }
 </script>

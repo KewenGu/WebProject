@@ -14,7 +14,7 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 var current_user;
 var login_status = "";
 var signup_status = "";
-var id = function(profiles) {
+var generateId = function(profiles) {
 	var max_id = 0;
 	profiles.forEach(function(user) {
 		user.notes.forEach(function(note) {
@@ -49,6 +49,7 @@ var id = function(profiles) {
 fs.writeFileSync("./public/res/profiles.json", JSON.stringify(profiles));*/
 
 var profiles = JSON.parse(fs.readFileSync("./public/res/profiles.json").toString());
+var currentNoteID = generateId(profiles);
 
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -59,13 +60,13 @@ app.get('/', function(req, res) {
 
 app.get('/login', function(req, res) {
 	console.log(login_status);
-	res.end(login_status);
+	res.end(login_status+'&'+ JSON.stringify(current_user));
 	login_status = "";
 });
 
 app.get('/signup', function(req, res) {
 	console.log(signup_status);
-	res.end(signup_status);
+	res.end(signup_status+'&');
 	signup_status = "";
 });
 
@@ -118,16 +119,15 @@ app.post('/signup', urlencodedParser, function(req, res) {
 
 // post 传入 title, content, create_time, modify_time, is_starred, remind_info, attachment_path
 app.post('/add', urlencodedParser, function(req, res) {
+	console.log('start add');
 	console.log(req.body);
 	var note = {
-		id: id,
+		id: currentNoteID,
 		title: req.body.title,
 	  contents: req.body.contents,
 		create_time: new Date(),
-	  //modify_time: req.body.modify_time,
-	  // is_starred: req.body.isStar,
-	  remind_info: req.body.remind_info,
-	  attachment_path: req.body.attachment_path
+	  modify_time: new Date()
+	  // isStar: req.body.isStar,
 	};
 	if (req.body.isStar) {
 		note.isStar = true;
@@ -135,44 +135,69 @@ app.post('/add', urlencodedParser, function(req, res) {
 	else {
 		note.isStar = false;
 	}
+	if (req.body.remind_info) {
+		note.remind_info = req.body.remind_info;
+	}
+	else {
+		note.remind_info = false;
+	}
+	if (req.body.attachment_path) {
+		note.attachment_path = req.body.attachment_path;
+	}
+	else {
+		note.attachment_path = false;
+	}
 	profiles.forEach(function(user) {
 		if (user.username === req.body.username) {
 			user.notes.push(note);
+			res.send(JSON.stringify(user));
 		}
 	});
 	console.log(note);
 	console.log(profiles);
-	id++;
+	currentNoteID++;
 	fs.writeFileSync("./public/res/profiles.json", JSON.stringify(profiles));
-	res.send(JSON.stringify(profiles));
 });
 
 // post 传入 id
 app.post('/delete', urlencodedParser, function(req, res) {
-	profile.forEach(function(user) {
-		user.notes.forEach(function(note) {
-			if (note.id === req.body.id) {
-				notes.splice(notes.indexOf(note), 1);
-			}
-		});
+	console.log('start delete');
+	console.log(req.body);
+	profiles.forEach(function(user) {
+		if (user.username === req.body.username) {
+			user.notes.forEach(function(note, index, arr) {
+				if (note.id == req.body.id) {
+					arr.splice(arr.indexOf(note), 1);
+				}
+			});
+			console.log(user);
+			res.send(JSON.stringify(user));
+		}
 	});
 	fs.writeFileSync("./public/res/profiles.json", JSON.stringify(profiles));
 });
 
 // post 传入 id, title, content, create_time, modify_time, is_starred, remind_info, attachment_path
 app.post('/edit', urlencodedParser, function(req, res) {
-	profile.forEach(function(user) {
-		user.notes.forEach(function(note) {
-			if (note.id === req.body.id) {
-				note.title = req.body.title;
-				note.content = req.body.content;
-				note.create_time = req.body.create_time;
-				note.modify_time = req.body.modify_time;
-				note.is_starred = req.body.is_starred;
-				note.remind_info = req.body.remind_info;
-				note.attachment_path = req.body.attachment_path;
-			}
-		});
+	console.log('start edit');
+	console.log(req.body);
+	console.log(profiles);
+	profiles.forEach(function(user) {
+		if (user.username === req.body.username) {
+			user.notes.forEach(function(note) {
+				if (note.id == req.body.id) {
+					note.title = req.body.title;
+					note.contents = req.body.contents;
+					// note.create_time = req.body.create_time;
+					// note.modify_time = req.body.modify_time;
+					// note.is_starred = req.body.is_starred;
+					// note.remind_info = req.body.remind_info;
+					// note.attachment_path = req.body.attachment_path;
+					console.log(note);
+				}
+			});
+			res.send(JSON.stringify(user));
+		}
 	});
 	fs.writeFileSync("./public/res/profiles.json", JSON.stringify(profiles));
 });
