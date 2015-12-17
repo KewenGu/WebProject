@@ -106,6 +106,12 @@ dialog
 }
 
 
+#container {
+  margin-top: 200px;
+  /* either of these will work for horizontal Isotope layouts */
+  height: 80%;
+}
+
 
 #main-part {
   -webkit-box-sizing: border-box;

@@ -70,61 +70,85 @@
           <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
           <li><a href="#">Link</a></li>
         </ul>
-        <!-- <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form> -->
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Notification</a></li>
           <li><a href="#">Sign out</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
       <div class="row">
-        <div class="col-sm-4">
-          Filter by:
-          <input type="search" name="filter" value="">
+        <div class="col-sm-6">
+          Choose of layout:
+          <div>
+            <select class="menu-group layout-mode-menu-group">
+              <option class="menuitem is-checked" data-layout-mode="masonry" checked="checked">masonry</option>
+              <option class="menuitem" data-layout-mode="fitRows">fitRows</option>
+              <option class="menuitem" data-layout-mode="cellsByRow">cellsByRow</option>
+              <option class="menuitem" data-layout-mode="vertical">vertical</option>
+              <option class="menuitem" data-layout-mode="packery">packery</option>
+              <option class="menuitem" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</option>
+              <option class="menuitem" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</option>
+              <option class="menuitem" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</option>
+            </select>
+            <!--<button class="button is-checked" data-layout-mode="masonry" checked="checked">masonry</button>-->
+            <!--<button class="button" data-layout-mode="fitRows">fitRows</button>-->
+            <!--<button class="button" data-layout-mode="cellsByRow">cellsByRow</button>-->
+            <!--<button class="button" data-layout-mode="vertical">vertical</button>-->
+            <!--<button class="button" data-layout-mode="packery">packery</button>-->
+            <!--<button class="button" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</button>-->
+            <!--<button class="button" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</button>-->
+            <!--<button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true">cellsByColumn</button>-->
+            <!--<button class="button" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</button>-->
+          </div>
         </div>
-        <div class="col-sm-4">
-          Sort by:
-          <input type="search" name="sort" value="">
-        </div>
-        <div class="col-sm-4">
-          <button id="add-one">
-            Add a new <span class="glyphicons glyphicons-plus"></span>
-          </button>
+        <div class="col-sm-6">
+          <div>
+            <button id="add-one">
+              Add a new <span class="glyphicons glyphicons-plus"></span>
+            </button>
+          </div>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
-    <div class="button-group layout-mode-button-group">
-      <button class="button is-checked" data-layout-mode="masonry" checked="checked">masonry</button>
-      <button class="button" data-layout-mode="fitRows">fitRows</button>
-      <button class="button" data-layout-mode="cellsByRow">cellsByRow</button>
-      <button class="button" data-layout-mode="vertical">vertical</button>
-      <button class="button" data-layout-mode="packery">packery</button>
-      <button class="button" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</button>
-      <button class="button" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</button>
-      <button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true">cellsByColumn</button>
-      <button class="button" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</button>
+      <div class="row">
+        <div class="col-sm-8">
+          Sort:
+          <div class="button-group sort-by-button-group">
+            <!--<select class="menu-group sort-by-menu-group">-->
+            <!--<option class="menuitem" data-sort-value="original-order" selected>&#45;&#45;Sort&#45;&#45;</option>-->
+            <!--<option class="menuitem" data-sort-value="title">Title</option>-->
+            <!--<option class="menuitem" data-sort-value="create_time">Create Time</option>-->
+            <!--<option class="menuitem" data-sort-value="modify_time">Last Modify Time</option>-->
+            <!--</select>-->
+            <button class="button" data-sort-value="title">Title</button>
+            <button class="button" data-sort-value="create_time">Create Time</button>
+            <button class="button" data-sort-value="modify_time">Last Modify Time</button>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <button class="shuffle-button button" >Shuffle</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          Filter:
+          <div class="button-group filters-button-group">
+            <button id="showAllF" class="button is-checked" data-filter="*">show all</button>
+            <button class="button" data-filter="isStar">isStar</button>
+            <button class="button" data-filter="endWithF">end with f</button>
+            <button class="button" data-filter="last24hrs">Last 1 hours</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
-    <div class="button-group sort-by-button-group">
-      <button class="button" data-sort-value="title">Title</button>
-      <button class="button" data-sort-value="create_time">Create Time</button>
-      <button class="button" data-sort-value="modify_time">Last Modify Time</button>
-    </div>
-    <button class="shuffle-button" >Shuffle</button>
-
   </nav>
+  <div id="container">
+    <div id="main-part" class="grid">
 
-  <div id="main-part" class="grid">
+      <!--<div class="col-sm-4" id="note1">-->
+        <!--<h3 id="note1-title">Now led tedious shy lasting females off</h3>-->
+        <!--<p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>-->
+      <!--</div>-->
 
-    <div class="col-sm-4" id="note1">
-      <h3 id="note1-title">Now led tedious shy lasting females off</h3>
-      <p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>
     </div>
-
   </div>
 
 </div>
@@ -182,8 +206,24 @@
       <br>
       <textarea id="edit-content" rows = "10" cols = "60"></textarea><br>
     </form>
+    <form onsubmit = 'return false;'>
+      <p>Input the time you want your email to be sent</p>
+      <br>
+      <label for="edityear">Year :</label>
+      <input type="number" id = "edityear" name="year" min = "2015" max = "2020" required>
+      <label for="editmonth">Month :</label>
+      <input type="number" id = "editmonth" name="month" min = "1" max = "12" required>
+      <label for="editday">Day :</label>
+      <input type="number" id = "editday" name="day" min = "1" max = "31" required>
+      <label for="edithour">Hour :</label>
+      <input type="number" id = "edithour" name="hour" min = "0" max = "23" required>
+      <label for="editmin">Minute :</label>
+      <input type="number" id = "editmin" name="minute" min = "0" max = "60" required>
+      <button type="submit" name="reminder" onclick = "handleemail();" id = "email" class="reminder">Email Notify</button>
+    </form>
     <input type="button" value="Save" onclick="editNote();">
     <input type="button" value="Delete" onclick="deleteNote();">
+
   </div>
 </dialog>
 
@@ -394,6 +434,8 @@
     };
     document.getElementById('edit-dialog').close();
   }
+
+
   function editNote() {
     var id = document.getElementById('edit-id');
     var isStar = document.getElementById('edit-star');
@@ -448,7 +490,13 @@
       tempNote.addEventListener('click', function (e) {
         e.preventDefault();
         // console.log(this);
-        document.getElementById('edit-title').value = this.querySelector('h3').innerText;
+        if(this.querySelector('.note-star').innerText == 'star'){
+          document.getElementById('edit-star').checked = true;
+        }
+        else{
+          document.getElementById('edit-star').checked = false;
+        }
+        document.getElementById('edit-title').value = this.querySelector('.note-title').innerText;
         document.getElementById('edit-create-time').innerText = this.querySelector('.note-create-time').innerText;
         document.getElementById('edit-content').value = this.querySelector('.note-content').innerText;
         // console.log(document.getElementById('edit-content').value);
@@ -471,89 +519,7 @@
     }
   }
 </script>
-<script type="text/javascript">
-  // external js: isotope.pkgd.js, cells-by-column.js, cells-by-row.js, fit-columns.js, horizontal.js, masonry-horizontal.js
-
-  $(document).ready(function() {
-    // init Isotope
-    var $grid = $('.grid').isotope({
-      itemSelector: '.grid-item',
-      layoutMode: 'masonry',
-      getSortData: {
-        title: '.note-title',
-        create_time: '.note-create-time',
-        modify_time: '.note-modify-time'
-      },
-      sortBy: 'title',
-      masonry: {
-        columnWidth: 110
-      },
-      cellsByRow: {
-        columnWidth: 220,
-        rowHeight: 220
-      },
-      masonryHorizontal: {
-        rowHeight: 110
-      },
-      cellsByColumn: {
-        columnWidth: 220,
-        rowHeight: 220
-      }
-    });
-
-    var isHorizontal = false;
-    var $window = $(window);
-
-    $('.layout-mode-button-group').on('click', 'button', function() {
-      // adjust container sizing if layout mode is changing from vertical or horizontal
-      var $this = $(this);
-      var isHorizontalMode = !!$this.attr('data-is-horizontal');
-      if (isHorizontal !== isHorizontalMode) {
-        // change container size if horiz/vert change
-        var containerStyle = isHorizontalMode ? {
-          height: $window.height() * 0.7
-        } : {
-          width: 'auto'
-        };
-        $grid.css(containerStyle);
-        isHorizontal = isHorizontalMode;
-      }
-      // change layout mode
-      var layoutModeValue = $this.attr('data-layout-mode');
-      console.log(layoutModeValue);
-      $grid.isotope({
-        layoutMode: layoutModeValue
-      });
-    });
-
-
-    // bind sort button click
-    $('.sort-by-button-group').on( 'click', 'button', function() {
-      var sortValue = $(this).attr('data-sort-value');
-      console.log(sortValue);
-      $grid.isotope({ sortBy: sortValue });
-      //$grid.isotope('updateSortData').isotope();
-      $grid.isotope('reloadItems');
-    });
-
-
-    // change is-checked class on buttons
-    $('.button-group').each(function(i, buttonGroup) {
-      var $buttonGroup = $(buttonGroup);
-      $buttonGroup.on('click', 'button', function() {
-        $buttonGroup.find('.is-checked').removeClass('is-checked');
-        $(this).addClass('is-checked');
-      });
-    });
-
-    $('.shuffle-button').on( 'click', function() {
-      console.log("shuffle");
-      $grid.isotope('shuffle');
-      $grid.isotope('reloadItems')
-    });
-
-
-  });
-</script>
-<script type="text/javascript" src="dragNdrop.js"></script>
+<script type="text/javascript" src="js/isotope.js"></script>
+<script type="text/javascript" src="js/dragNdrop.js"></script>
+<script type="text/javascript" src="js/sendEmail.js"></script>
 </html>

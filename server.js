@@ -6,6 +6,9 @@ var path = require('path');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
+var nodemailer = require("nodemailer");
+var schedule = require('node-schedule');
+
 
 
 var app = express();
@@ -148,11 +151,12 @@ app.post('/add', urlencodedParser, function(req, res) {
 		note.attachment_path = false;
 	}
 	profiles.forEach(function(user) {
-		if (user.username === req.body.username) {
+		if(user.username === req.body.username){
 			user.notes.push(note);
 			res.send(JSON.stringify(user));
 		}
 	});
+
 	console.log(note);
 	console.log(profiles);
 	currentNoteID++;
@@ -164,9 +168,9 @@ app.post('/delete', urlencodedParser, function(req, res) {
 	console.log('start delete');
 	console.log(req.body);
 	profiles.forEach(function(user) {
-		if (user.username === req.body.username) {
-			user.notes.forEach(function(note, index, arr) {
-				if (note.id == req.body.id) {
+		if(user.username === req.body.username) {
+			user.notes.forEach(function(note, index, arr){
+				if(note.id == req.body.id) {
 					arr.splice(arr.indexOf(note), 1);
 				}
 			});
@@ -182,17 +186,16 @@ app.post('/edit', urlencodedParser, function(req, res) {
 	console.log('start edit');
 	console.log(req.body);
 	console.log(profiles);
+	//current_user = findUser(req.body.username);
+	//var editNote = findNote(current_user, req.body.id);
+	//console.log(editNote);
 	profiles.forEach(function(user) {
 		if (user.username === req.body.username) {
-			user.notes.forEach(function(note) {
+			user.notes.forEach(function (note) {
 				if (note.id == req.body.id) {
 					note.title = req.body.title;
 					note.contents = req.body.contents;
-					// note.create_time = req.body.create_time;
-					// note.modify_time = req.body.modify_time;
-					// note.is_starred = req.body.is_starred;
-					// note.remind_info = req.body.remind_info;
-					// note.attachment_path = req.body.attachment_path;
+					note.isStar = req.body.isStar;
 					console.log(note);
 				}
 			});
@@ -200,6 +203,54 @@ app.post('/edit', urlencodedParser, function(req, res) {
 		}
 	});
 	fs.writeFileSync("./public/res/profiles.json", JSON.stringify(profiles));
+});
+
+
+
+app.post('/email', urlencodedParser, function(req, res){
+	var emailUser;
+	var emailNote;
+	profiles.forEach(function(user) {
+		if (user.username === req.body.username) {
+			emailUser = user;
+			user.notes.forEach(function (note) {
+				if (note.id == req.body.id) {
+					emailNote = note;
+					console.log(note);
+				}
+			});
+		}
+	});
+
+	var date1 = new Date(req.body.year, req.body.month-1, req.body.day, req.body.hour, req.body.minute, 0);
+	var schedJob = schedule.scheduleJob(date1, function(){
+		console.log("creating email");
+		var transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				user: 'goddesscs4241finalproject@gmail.com',
+				pass: 'Wearegoddess'
+			}
+		}, {
+			// default values for sendMail method
+			from: 'goddesscs4241finalproject@gmail.com',
+			headers: {
+				'My-Awesome-Header': '123'
+			}
+		});
+		transporter.sendMail({
+			to: emailUser.email,
+			subject: emailNote.title,
+			text: emailNote.contents,
+			attachments: [
+				{   // utf-8 string as an attachment
+					filename: 'text1.txt',
+					content: 'hello world!'
+				}]
+		});
+		console.log('email sent');
+	});
+	res.end();
 });
 
 
@@ -213,3 +264,6 @@ function validateEmail(email) {
 	var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
 }
+
+
+
