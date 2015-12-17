@@ -10,7 +10,7 @@ var dragSrcEl = null;
 
 function handleDragStart(e) {
 	// Target (this) element is the source node.
-	this.style.opacity = '0.4';
+	//this.style.opacity = '0.4';
 
 	dragSrcEl = this;
 

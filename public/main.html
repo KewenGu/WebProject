@@ -20,10 +20,19 @@
   <script src="https://rawgit.com/metafizzy/isotope-masonry-horizontal/master/masonry-horizontal.js"></script>
   <script src="https://rawgit.com/metafizzy/isotope-packery/master/packery-mode.pkgd.js"></script>
   <script type="text/JavaScript" src="http://underscorejs.org/underscore-min.js" ></script>
-  <script type="text/javascript" src="template.js"></script>
+  <script type="text/javascript" src="js/template.js"></script>
+  <style>
+    .navbar-default
+    {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: #FFF;
+    }
+
+  </style>
 </head>
 <body>
-<div id="username" hidden></div>
+
 <div id="login-page" class="container">
   <div class="row" id="forms">
     <div class="forms col-sm-4">
@@ -58,99 +67,70 @@
 <div id="main-page" hidden>
 
   <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
 
-        <a class="navbar-brand" href="#">Brand</a>
+        <a class="navbar-brand" href="#">Goddess of CS4241</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-          <li><a href="#">Link</a></li>
-        </ul>
+      <div class="collapse navbar-collapse list" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Notification</a></li>
-          <li><a href="#">Sign out</a></li>
+          <li><p id="welcome-msg">Hi&nbsp;<span  id="username"></span>!</p></li>
+          <li><button href="#">Notification</button></li>
+          <li><button onclick="signout();">Sign out</button></li>
         </ul>
       </div><!-- /.navbar-collapse -->
-      <div class="row">
-        <div class="col-sm-6">
-          Choose of layout:
-          <div>
-            <select class="menu-group layout-mode-menu-group">
-              <option class="menuitem is-checked" data-layout-mode="masonry" checked="checked">masonry</option>
-              <option class="menuitem" data-layout-mode="fitRows">fitRows</option>
-              <option class="menuitem" data-layout-mode="cellsByRow">cellsByRow</option>
-              <option class="menuitem" data-layout-mode="vertical">vertical</option>
-              <option class="menuitem" data-layout-mode="packery">packery</option>
-              <option class="menuitem" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</option>
-              <option class="menuitem" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</option>
-              <option class="menuitem" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</option>
-            </select>
-            <!--<button class="button is-checked" data-layout-mode="masonry" checked="checked">masonry</button>-->
-            <!--<button class="button" data-layout-mode="fitRows">fitRows</button>-->
-            <!--<button class="button" data-layout-mode="cellsByRow">cellsByRow</button>-->
-            <!--<button class="button" data-layout-mode="vertical">vertical</button>-->
-            <!--<button class="button" data-layout-mode="packery">packery</button>-->
-            <!--<button class="button" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</button>-->
-            <!--<button class="button" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</button>-->
-            <!--<button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true">cellsByColumn</button>-->
-            <!--<button class="button" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</button>-->
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div>
-            <button id="add-one">
-              Add a new <span class="glyphicons glyphicons-plus"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8">
-          Sort:
-          <div class="button-group sort-by-button-group">
-            <!--<select class="menu-group sort-by-menu-group">-->
-            <!--<option class="menuitem" data-sort-value="original-order" selected>&#45;&#45;Sort&#45;&#45;</option>-->
-            <!--<option class="menuitem" data-sort-value="title">Title</option>-->
-            <!--<option class="menuitem" data-sort-value="create_time">Create Time</option>-->
-            <!--<option class="menuitem" data-sort-value="modify_time">Last Modify Time</option>-->
-            <!--</select>-->
-            <button class="button" data-sort-value="title">Title</button>
-            <button class="button" data-sort-value="create_time">Create Time</button>
-            <button class="button" data-sort-value="modify_time">Last Modify Time</button>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <button class="shuffle-button button" >Shuffle</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          Filter:
-          <div class="button-group filters-button-group">
-            <button id="showAllF" class="button is-checked" data-filter="*">show all</button>
-            <button class="button" data-filter="isStar">isStar</button>
-            <button class="button" data-filter="endWithF">end with f</button>
-            <button class="button" data-filter="last24hrs">Last 1 hours</button>
-          </div>
-        </div>
+  </nav>
+  <div class="row" id="setting">
+    <div class="col-md-3 block">
+      <label>Choose of layout:&nbsp;</label>
+      <select class="menu-group layout-mode-menu-group">
+        <option class="menuitem is-checked" data-layout-mode="masonry" checked="checked">masonry</option>
+        <option class="menuitem" data-layout-mode="fitRows">fitRows</option>
+        <option class="menuitem" data-layout-mode="cellsByRow">cellsByRow</option>
+        <option class="menuitem" data-layout-mode="vertical">vertical</option>
+        <option class="menuitem" data-layout-mode="packery">packery</option>
+        <option class="menuitem" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</option>
+        <option class="menuitem" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</option>
+        <option class="menuitem" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</option>
+      </select>
+        <!--<button class="button is-checked" data-layout-mode="masonry" checked="checked">masonry</button>-->
+        <!--<button class="button" data-layout-mode="fitRows">fitRows</button>-->
+        <!--<button class="button" data-layout-mode="cellsByRow">cellsByRow</button>-->
+        <!--<button class="button" data-layout-mode="vertical">vertical</button>-->
+        <!--<button class="button" data-layout-mode="packery">packery</button>-->
+        <!--<button class="button" data-layout-mode="masonryHorizontal" data-is-horizontal="true">masonryHorizontal</button>-->
+        <!--<button class="button" data-layout-mode="fitColumns" data-is-horizontal="true">fitColumns</button>-->
+        <!--<button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true">cellsByColumn</button>-->
+        <!--<button class="button" data-layout-mode="horizontal" data-is-horizontal="true">horizontal</button>-->
+    </div>
+    <div class="col-md-3 block">
+      <label>Sort:&nbsp;</label>
+      <div class="button-group sort-by-button-group">
+        <button class="button is-checked" data-sort-value="newest">Newest First</button>
+        <button class="button" data-sort-value="oldest">Oldest First</button>
+        <button class="button" data-sort-value="title">Title</button>
       </div>
     </div>
-  </nav>
-  <div id="container">
-    <div id="main-part" class="grid">
-
-      <!--<div class="col-sm-4" id="note1">-->
-        <!--<h3 id="note1-title">Now led tedious shy lasting females off</h3>-->
-        <!--<p>Over fact all son tell this any his. No insisted confined of weddings to returned to debating rendered. Keeps order fully so do party means young. Table nay him jokes quick. In felicity up to graceful mistaken horrible consider. Abode never think to at. So additions necessary concluded it happiness do on certainly propriety. On in green taken do offer witty of.</p>-->
-      <!--</div>-->
-
+    <div class="col-md-3 block">
+      <label>Filter:&nbsp;</label>
+      <div class="button-group filters-button-group">
+        <button id="showAllF" class="button is-checked" data-filter="*">Show All</button>
+        <button class="button" data-filter="isStar">Starred</button>
+        <button class="button" data-filter="last1hrs">Last 1 hours</button>
+      </div>
+    </div>
+    <div class="col-md-1 block">
+      <button class="shuffle-button button" >Shuffle</button>
+    </div>
+    <div class="col-md-2 block">
+        <button id="add-one" class="button">&nbsp;Add&nbsp;<span class="glyphicons glyphicons-plus"></span>
+        </button>
     </div>
   </div>
-
+  <div id="container">
+    <div id="main-part" class="grid"></div>
+  </div>
 </div>
 </body>
 
@@ -188,21 +168,16 @@
     <input id="edit-close" class="close-edit" type="button" name="close" value="Close"><br>
     <form onsubmit="return false;">
       <input type="checkbox" id="edit-star" name="isStar" value="isStar"><label for="edit-star">Star it</label>
-      <label for="edit-share" id="edit-share" class="share-edit"> Share to :</label>
-      <input type="text" name="share" placeholder="Username/Email">
-      <br>
-      <br>
+      <label for="edit-share"> Share to :</label>
+      <input type="text" name="share" id="edit-share" placeholder="Username/Email">
       <br>
       <label for="edit-title"> Title</label>
-      <input type="text" name="title" id="edit-title" class="edittitle" placeholder="Edit your title here"><br>
-      <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p>
-      <p style="display: inline-block;" class="time-edit">Created time:&nbsp;<p style="display: inline-block;" id="edit-create-time">December 10th 2:36PM </p></p>
+      <input type="text" name="title" id="edit-title" placeholder="Edit your title here"><br>
+      <p class="time-edit">Create time:&nbsp;<span id="edit-create-time"></span></p>
+      <p class="time-edit">Modify time:&nbsp;<span id="edit-modify-time"></span></p>
       <p>Attached File : </p><div class="attachment"><input type="file" name="attachFile" value=""></div>
-      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
-      <br>
       <br>
       <label for="edit-content">Contents:</label>
-      <br>
       <br>
       <textarea id="edit-content" rows = "10" cols = "60"></textarea><br>
     </form>
@@ -219,8 +194,11 @@
       <input type="number" id = "edithour" name="hour" min = "0" max = "23" required>
       <label for="editmin">Minute :</label>
       <input type="number" id = "editmin" name="minute" min = "0" max = "60" required>
-      <button type="submit" name="reminder" onclick = "handleemail();" id = "email" class="reminder">Email Notify</button>
+      <!--<label for="date-pick">Pick a date</label><input type="date" id="date-pick">-->
+      <!--<label for="time-pick">Pick a time</label><input type="time" id="time-pick">-->
+      <input type="button" value="Set Reminder" onclick = "handleEmail();" id = "email" class="button">
     </form>
+    <br>
     <input type="button" value="Save" onclick="editNote();">
     <input type="button" value="Delete" onclick="deleteNote();">
 
@@ -265,6 +243,12 @@
 
   }
 
+  function signout() {
+    document.getElementById('username').innerText = "";
+    document.getElementById("main-page").hidden = true;
+    document.getElementById("login-page").hidden = false;
+    console.log('signed out');
+  }
 
 
   makeGet('/login', "#login-notif");
@@ -318,65 +302,25 @@
 
 
 
-  var sample = {
-    title: "It sportsman earnestly ye preserved an on",
-    contents: "Too cultivated use solicitude frequently. Dashwood likewise up consider continue entrance ladyship oh. Wrong guest given purse power is no. Friendship to connection an am considered difficulty. Country met pursuit lasting moments why calling certain the. Middletons boisterous our way understood law. Among state cease how and sight since shall. Material did pleasure breeding our humanity she contempt had. So ye really mutual no cousin piqued summer result."
-    // createdTime:
-  };
-
   window.onload = function () {
-    // var addOne = document.getElementById('addOne');
-    var notesContener = document.getElementById('main-part');
-    var addNoteDialog = document.getElementById('addNote');
 
+    var notesContener = document.getElementById('main-part');
+    var addDialog = document.getElementById('add-dialog');
     var editDialog = document.getElementById('edit-dialog');
 
-    $('#note1').click(function (e) {
-      e.preventDefault();
-      document.getElementById('edit-title').value = document.getElementById('note1-title').innerText;
-      // document.getElementById('add-content').value = document.getElementById('note1-title').innerText;
-      editDialog.showModal();
-      console.log(editDialog);
-      console.log(this);
-    });
     $('#edit-close').click(function () {
       editDialog.close();
     });
 
-    var addDialog = document.getElementById('add-dialog');
 
     $('#add-one').click(function (e) {
       e.preventDefault();
-      // $('#add-title').value = this.getElementsByTagName('h3').innerText;
       addDialog.showModal();
-      // console.log(addDialog);
-      // console.log(this);
     });
+
     $('#add-close').click(function () {
-
-      // $('#add-star').attr('checked', false);
-      // $('#add-title').removeAttr('value');
-      // $('#add-content').removeAttr('value');
-
       addDialog.close();
     });
-
-    var inputEl = document.getElementById("note1-title");
-     function getWidthOfInput() {
-       var tmp = document.createElement("span");
-       tmp.className = "edittitle tmp-element";
-       tmp.innerHTML = inputEl.innerText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-       document.body.appendChild(tmp);
-       var theWidth = tmp.getBoundingClientRect().width;
-       document.body.removeChild(tmp);
-      console.log(theWidth);
-       return theWidth;
-     }
-     function adjustWidthOfInput() {
-       document.getElementById("edit-title").style.width = getWidthOfInput() + "px";
-     }
-     adjustWidthOfInput();
-     inputEl.onkeyup = adjustWidthOfInput;
 
   };
 
@@ -391,8 +335,9 @@
     reqp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     var query = "";
-    if(isStar.checked)
-      query += 'isStar=' +isStar.checked +'&';
+    if(isStar.checked) {
+      query += 'isStar=' + isStar.checked + '&';
+    }
     query += 'share=' + share.value + '&';
     query += 'title=' + title.value + '&';
     query += 'contents=' + contents.value + '&';
@@ -464,9 +409,10 @@
         console.log(resp);
         buildTable(resp);
       }
-    }
+    };
     document.getElementById('edit-dialog').close();
   }
+
   function buildTable(user) {
     var mainPart = document.getElementById('main-part');
     mainPart.innerHTML = '';
@@ -498,19 +444,19 @@
         }
         document.getElementById('edit-title').value = this.querySelector('.note-title').innerText;
         document.getElementById('edit-create-time').innerText = this.querySelector('.note-create-time').innerText;
+        document.getElementById('edit-modify-time').innerText = this.querySelector('.note-modify-time').innerText;
         document.getElementById('edit-content').value = this.querySelector('.note-content').innerText;
         // console.log(document.getElementById('edit-content').value);
         document.getElementById('edit-id').innerText = this.querySelector('.note-id').innerText;
         editDialog.showModal();
-        // console.log(editDialog);
 
       });
       tempNote.addEventListener('dragstart', handleDragStart, false);
-    	tempNote.addEventListener('dragenter', handleDragEnter, false);
-    	tempNote.addEventListener('dragover', handleDragOver, false);
-    	tempNote.addEventListener('dragleave', handleDragLeave, false);
-    	tempNote.addEventListener('drop', handleDrop, false);
-    	tempNote.addEventListener('dragend', handleDragEnd, false);
+      tempNote.addEventListener('dragenter', handleDragEnter, false);
+      tempNote.addEventListener('dragover', handleDragOver, false);
+      tempNote.addEventListener('dragleave', handleDragLeave, false);
+      tempNote.addEventListener('drop', handleDrop, false);
+      tempNote.addEventListener('dragend', handleDragEnd, false);
     });
     if(user.notes.length==0){
       tempNote = document.createElement('div');

@@ -12,11 +12,11 @@ $(document).ready(function() {
 		layoutMode: 'masonry',
 		getSortData: {
 			title: '.note-title',
-			create_time: '.note-create-time',
-			modify_time: '.note-modify-time'
+			newest: '.note-create-time',
+			oldest: '.note-create-time'
 		},
-		//sortBy: "title",
-		//sortAscending: false,
+		sortBy: "newest",
+		sortAscending: false,
 		masonry: {
 			columnWidth: 110
 		},
@@ -32,7 +32,7 @@ $(document).ready(function() {
 			rowHeight: 220
 		}
 	});
-
+	$grid.isotope('layout');
 	var isHorizontal = false;
 	var $window = $(window);
 
@@ -60,20 +60,33 @@ $(document).ready(function() {
 			$grid.css(containerStyle);
 			isHorizontal = isHorizontalMode;
 		}
-
+		$grid.isotope('reloadItems');
 		$grid.isotope({
 			layoutMode: layoutModeValue
 		});
-		$grid.isotope('reloadItems');
+
 	});
 
 
 	// bind sort button click
 	$('.sort-by-button-group').on( 'click', 'button', function() {
+		$('.filters-button-group').find('.is-checked').removeClass('is-checked');
+		$('.filters-button-group').find('#showAllF').addClass('is-checked');
+		$grid.isotope({ filter: '*' });
+		$grid.isotope('reloadItems');
 		var sortValue = $(this).attr('data-sort-value');
 		console.log(sortValue);
-		$grid.isotope({ sortBy: sortValue });
-		//$grid.isotope('updateSortData').isotope();
+		//$grid.isotope('reloadItems');
+		if (sortValue === 'newest') {
+			$grid.isotope({sortBy: sortValue, sortAscending: false});
+		}
+		else if (sortValue === 'oldest') {
+			$grid.isotope({sortBy: sortValue, sortAscending: true});
+		}
+		else if (sortValue === 'title') {
+			$grid.isotope({sortBy: sortValue, sortAscending: true});
+		}
+		$grid.isotope('updateSortData').isotope();
 		$grid.isotope('reloadItems');
 	});
 
@@ -87,13 +100,7 @@ $(document).ready(function() {
 			var star = $(this).find('.note-star').text();
 			return star == 'star';
 		},
-		endWithF: function () {
-			var end = $(this).find('.note-content').text();
-			console.log(end.match( /f$/ ));
-			console.log(end);
-			return end.match( /f$/ );
-		},
-		last24hrs: function () {
+		last1hrs: function () {
 			var createTime = $(this).find('.note-create-time').text();
 			var createTimeMilli = Date.parse(createTime);
 			console.log(createTimeMilli);
@@ -104,24 +111,24 @@ $(document).ready(function() {
 	// bind filter button click
 	$('.filters-button-group').on( 'click', 'button', function() {
 		$grid.isotope({ filter: '*' });
+		$grid.isotope('reloadItems');
 		var filterValue = $( this ).attr('data-filter');
 		// use filterFn if matches value
 		filterValue = filterFns[ filterValue ] || filterValue;
 		console.log(filterValue);
 		$grid.isotope('reloadItems');
 		$grid.isotope({ filter: filterValue });
-		console.log($grid.isotope);
 	});
 	$('#showAllF').on('click', function () {
 		$grid.isotope({ filter: '*' });
-		// $grid.isotope('reloadItems');
+		$grid.isotope('reloadItems');
 
 	});
 
 	$('.shuffle-button').on( 'click', function() {
 		console.log("shuffle");
-		$grid.isotope('shuffle');
 		$grid.isotope('reloadItems');
+		$grid.isotope('shuffle');
 		$grid.isotope('updateSortData').isotope();
 
 	});

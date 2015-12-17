@@ -25,7 +25,7 @@ var generateId = function(profiles) {
 				max_id = note.id;
 		});
 	});
-	return max_id++;
+	return max_id+1;
 };
 
 /*var profiles = [
@@ -128,8 +128,8 @@ app.post('/add', urlencodedParser, function(req, res) {
 		id: currentNoteID,
 		title: req.body.title,
 	  contents: req.body.contents,
-		create_time: new Date(),
-	  modify_time: new Date()
+		create_time: (new Date()).toLocaleString(),
+	  modify_time: (new Date()).toLocaleString()
 	  // isStar: req.body.isStar,
 	};
 	if (req.body.isStar) {
@@ -196,6 +196,7 @@ app.post('/edit', urlencodedParser, function(req, res) {
 					note.title = req.body.title;
 					note.contents = req.body.contents;
 					note.isStar = req.body.isStar;
+					note.modify_time = (new Date()).toLocaleString();
 					console.log(note);
 				}
 			});

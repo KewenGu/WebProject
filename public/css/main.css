@@ -1,4 +1,58 @@
 
+
+html
+{
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  background-color: rgb(255, 246, 229);
+}
+
+#setting
+{
+  color: #000;
+  padding: 50px;
+  background-color: #63A69F;
+}
+
+.list
+{
+  margin-right: 30px;
+  margin-top: 12px;
+}
+
+.list ul li
+{
+  margin: auto 10px;
+  font-size: 14px;
+}
+
+.list ul li #welcome-msg
+{
+  color: ;
+  font-size: 20px;
+}
+
+.list ul li button
+{
+  display: inline-block;
+  padding: auto 10px;
+  background: #EEE;
+  border: none;
+  background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
+  color: #222;
+  text-shadow: 0 1px white;
+  cursor: pointer;
+}
+
+
+.block
+{
+  display: inline-flex;
+  position: absolute;
+  margin: 10px auto;
+  horiz-align: right;
+}
+
+
 #login-page
 {
   background: url("../res/login-bg.jpg") center;
@@ -49,7 +103,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   background-color: inherit;
-  border: 2px solid #000;
+  border: 1px solid #000;
 
 }
 
@@ -59,15 +113,41 @@
   text-align: left;
 }
 
+#add-one {
 
-#main-page #main-part
-{
-  margin-top: 100px;
+  /*Step 2: Basic Button Styles*/
+  display: block;
+  height: 50px;
+  width: 100px;
+  background: #34696f;
+  border: 2px solid rgba(33, 68, 72, 0.59);
+
+  /*Step 3: Text Styles*/
+  color: rgba(0, 0, 0, 0.55);
+  text-align: center;
+  font: bold 2em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+
+  /*Step 4: Fancy CSS3 Styles*/
+  background: -webkit-linear-gradient(top, #FF7F66, #FF7F66);
+  background: -moz-linear-gradient(top, #FF7F66, #FF7F66);
+  background: -o-linear-gradient(top, #FF7F66, #FF7F66);
+  background: -ms-linear-gradient(top, #FF7F66, #FF7F66);
+  background: linear-gradient(top, #FF7F66, #FF7F66);
+
+  -webkit-border-radius: 50px;
+  -khtml-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+
+  -webkit-box-shadow: 0 8px 0 #7F3F33;
+  -moz-box-shadow: 0 8px 0 #7F3F33;
+  box-shadow: 0 8px 0 #7F3F33;
+
+  text-shadow: 0 2px 2px rgba(255, 255, 255, 0.2);
+
 }
-#main-page .col-sm-4
-{
-  /*border: solid;*/
-}
+
+
 dialog
 {
   width: 800px;
@@ -88,12 +168,6 @@ dialog
   font-style: italic;
 }
 
-/*#popup-note .add-content
-{
-  font-family:"Times New Roman", Times, serif;
-  font-size: 25px;
-}*/
-
 .tmp-element {
   visibility: hidden;
   white-space: pre;
@@ -106,31 +180,25 @@ dialog
 }
 
 
+
 #container {
-  margin-top: 200px;
   /* either of these will work for horizontal Isotope layouts */
   height: 80%;
-}
-
-
-#main-part {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-
 }
 
 
 .button {
   display: inline-block;
-  padding: 0.5em 1.0em;
+  padding: 10px 10px;
   background: #EEE;
   border: none;
   border-radius: 7px;
   background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
   color: #222;
-  font-family: sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   text-shadow: 0 1px white;
   cursor: pointer;
 }
@@ -191,9 +259,9 @@ dialog
 .grid-item {
   position: relative;
   float: left;
-  margin: 5px;
+  margin: 10px 10px;
   padding: 10px;
-  background: red;
+  background: #F2594B;
   color: white;
   font-size: 1em;
 }

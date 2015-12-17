@@ -2,7 +2,7 @@
  * Created by Kewen on 12/16/15.
  */
 
-function handleemail(){
+function handleEmail(){
 	var year = document.getElementById('edityear');
 	var month = document.getElementById('editmonth');
 	var day = document.getElementById('editday');
