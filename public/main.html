@@ -70,7 +70,7 @@
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
 
-        <a class="navbar-brand" href="#">Goddess of CS4241</a>
+        <p class="navbar-brand" href="#">Goddess of CS4241</p>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse list" id="bs-example-navbar-collapse-1">
@@ -148,8 +148,11 @@
       <label for="add-title"> Title</label>
       <input type="text" name="title" id="add-title" placeholder="Edit your title here"><br>
       <!-- <p style="display: inline-block;" class="time-edit">Time Last Edited:&nbsp;<p style="display: inline-block;">December 10th 2:36PM </p></p> -->
-      <p>Attached File : </p><div class="attachment"><input type="file" name="attachFile" value=""></div>
-      <input type="button" name="reminder" value="Email Notify" onclick = "emailSend();" class="reminder">
+      <p>Attached File : </p>
+      <div class="attachment">
+        <input type="file" id="add-file" name="files[]" multiple />
+        <output id="add-list" class="image-list"></output>
+      </div>
       <br>
       <br>
       <label for="add-content">Contents:</label>
@@ -175,8 +178,11 @@
       <input type="text" name="title" id="edit-title" placeholder="Edit your title here"><br>
       <p class="time-edit">Create time:&nbsp;<span id="edit-create-time"></span></p>
       <p class="time-edit">Modify time:&nbsp;<span id="edit-modify-time"></span></p>
-      <p>Attached File : </p><div class="attachment"><input type="file" name="attachFile" value=""></div>
-      <br>
+      <p>Attached File : </p>
+      <div class="attachment">
+        <input type="file" id="edit-file" name="files[]" multiple />
+        <output id="edit-list" class="image-list"></output>
+      </div>      <br>
       <label for="edit-content">Contents:</label>
       <br>
       <textarea id="edit-content" rows = "10" cols = "60"></textarea><br>
@@ -194,8 +200,8 @@
       <input type="number" id = "edithour" name="hour" min = "0" max = "23" required>
       <label for="editmin">Minute :</label>
       <input type="number" id = "editmin" name="minute" min = "0" max = "60" required>
-      <!--<label for="date-pick">Pick a date</label><input type="date" id="date-pick">-->
-      <!--<label for="time-pick">Pick a time</label><input type="time" id="time-pick">-->
+      <!-- <label for="date-pick">Pick a date</label><input type="date" id="date-pick"> -->
+      <!-- <label for="time-pick">Pick a time</label><input type="time" id="time-pick"> -->
       <input type="button" value="Set Reminder" onclick = "handleEmail();" id = "email" class="button">
     </form>
     <br>
@@ -205,6 +211,7 @@
   </div>
 </dialog>
 
+<script type="text/javascript" src="js/dragNdrop.js"></script>
 <script type="text/javascript">
   var username;
   var notif;
@@ -312,7 +319,6 @@
       editDialog.close();
     });
 
-
     $('#add-one').click(function (e) {
       e.preventDefault();
       addDialog.showModal();
@@ -329,18 +335,26 @@
     var share = document.getElementById('add-share');
     var title = document.getElementById('add-title');
     var contents = document.getElementById('add-content');
+    var attachi = document.getElementById('add-list').querySelector('.attachImage');
 
     var reqp = new XMLHttpRequest();
     reqp.open('POST', '/add', true);
     reqp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     var query = "";
-    if(isStar.checked) {
-      query += 'isStar=' + isStar.checked + '&';
-    }
+    // if(isStar.checked)
+    query += 'isStar=' + isStar.checked + '&';
     query += 'share=' + share.value + '&';
     query += 'title=' + title.value + '&';
     query += 'contents=' + contents.value + '&';
+    console.log(attachi);
+    if(attachi != null){
+      console.log(attachi);
+      query += 'attachImage=' + attachi.src + '&';
+    }
+    else {
+      query += 'attachImage=' + '&';
+    }
     query += 'username=' + document.getElementById('username').innerText;
     var sendStr = query.split(' ').join('+');
     reqp.send(sendStr);
@@ -354,8 +368,8 @@
       }
     };
     document.getElementById('add-dialog').close();
-
   }
+
   function deleteNote() {
     // console.log('delete');
     var id = document.getElementById('edit-id');
@@ -387,6 +401,7 @@
     // var share = document.getElementById('edit-share');
     var title = document.getElementById('edit-title');
     var contents = document.getElementById('edit-content');
+    var attachi = document.getElementById('edit-list').querySelector('.attachImage');
 
     var reqp = new XMLHttpRequest();
     reqp.open('POST', '/edit', true);
@@ -397,6 +412,14 @@
       query += 'isStar=' + isStar.checked +'&';
     query += 'title=' + title.value + '&';
     query += 'contents=' + contents.value + '&';
+    console.log(attachi);
+    if(attachi != null){
+      console.log(attachi);
+      query += 'attachImage=' + attachi.src + '&';
+    }
+    else {
+      query += 'attachImage=' + '&';
+    }
     query += 'username=' + document.getElementById('username').innerText + '&';
     query += 'id=' + id.innerText;
     var sendStr = query.split(' ').join('+');
@@ -443,6 +466,30 @@
           document.getElementById('edit-star').checked = false;
         }
         document.getElementById('edit-title').value = this.querySelector('.note-title').innerText;
+
+        var inputEi = document.getElementById("edit-title");
+        var inputEl = this.querySelector('.note-title');
+         function getWidthOfInput() {
+           var tmp = document.createElement("span");
+           tmp.className = "edittitle tmp-element";
+           tmp.innerHTML = inputEl.innerText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+           document.body.appendChild(tmp);
+           var theWidth = tmp.getBoundingClientRect().width;
+           document.body.removeChild(tmp);
+          console.log(theWidth);
+           return theWidth;
+         }
+         function adjustWidthOfInput() {
+           if(getWidthOfInput() < 80){
+              document.getElementById("edit-title").style.width = "120px";
+           }
+           else{
+             document.getElementById("edit-title").style.width = getWidthOfInput()+40 + "px";
+           }
+         }
+         adjustWidthOfInput();
+         inputEi.onkeyup = adjustWidthOfInput;
+
         document.getElementById('edit-create-time').innerText = this.querySelector('.note-create-time').innerText;
         document.getElementById('edit-modify-time').innerText = this.querySelector('.note-modify-time').innerText;
         document.getElementById('edit-content').value = this.querySelector('.note-content').innerText;
@@ -465,7 +512,44 @@
     }
   }
 </script>
+<script type="text/javascript">
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+    console.log(evt.target.parentElement);
+     // files is a FileList of File objects. List some properties.
+     var output = [];
+     for (var i = 0, f; f = files[i]; i++) {
+       output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+         f.size, ' bytes, last modified: ',
+         f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+         '</li>');
+
+       evt.target.parentElement.querySelector('.image-list').innerHTML = '<ul>' + output.join('') + '</ul>';
+       // Only process image files.
+       if (!f.type.match('image.*')) {
+         continue;
+       }
+       var reader = new FileReader();
+
+       // Closure to capture the file information.
+       reader.onload = (function(theFile) {
+         return function(e) {
+           // Render thumbnail.
+           var span = document.createElement('span');
+           span.innerHTML = ['<img style="width: 100px; height: 100px;" class="attachImage" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+          // span.innerText = e.target.result;
+           evt.target.parentElement.querySelector('.image-list').insertBefore(span, null);
+           console.log(e.target.result);
+         };
+       })(f);
+       // Read in the image file as a data URL.
+       reader.readAsDataURL(f);
+      // reader.readAsText(f);
+     }
+  }
+  document.getElementById('add-file').addEventListener('change', handleFileSelect, false);
+  document.getElementById('edit-file').addEventListener('change', handleFileSelect, false);
+</script>
 <script type="text/javascript" src="js/isotope.js"></script>
-<script type="text/javascript" src="js/dragNdrop.js"></script>
 <script type="text/javascript" src="js/sendEmail.js"></script>
 </html>
