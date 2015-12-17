@@ -6,32 +6,43 @@ html
   background-color: rgb(255, 246, 229);
 }
 
+
+#nav-header a
+{
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  color: #FFF;
+  font-size: 2.5em;
+  padding: 20px;
+}
+
 #setting
 {
   color: #000;
-  padding: 50px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   background-color: #63A69F;
 }
 
-.list
+#list
 {
-  margin-right: 30px;
-  margin-top: 12px;
-}
-
-.list ul li
-{
-  margin: auto 10px;
+  display: inline-block;
+  margin: 8px 30px;
+  margin-inside: 10px;
   font-size: 14px;
+  float: right;
 }
 
-.list ul li #welcome-msg
+
+#list #welcome-msg
 {
-  color: ;
+  color: #FFF;
   font-size: 20px;
+  margin-right: 15px;
 }
 
-.list ul li button
+#list button
 {
   display: inline-block;
   padding: auto 10px;
@@ -41,6 +52,8 @@ html
   color: #222;
   text-shadow: 0 1px white;
   cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 
@@ -49,8 +62,28 @@ html
   display: inline-flex;
   position: absolute;
   margin: 10px auto;
+  font-size: 16px;;
   horiz-align: right;
 }
+
+
+.note-title
+{
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.note-content
+{
+  font-size: 1em;
+}
+
+
+
+
+
+
+
 
 
 #login-page

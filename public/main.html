@@ -24,7 +24,7 @@
   <style>
     .navbar-default
     {
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.5);
       border: none;
       color: #FFF;
     }
@@ -68,18 +68,15 @@
 
   <nav class="navbar navbar-default navbar-fixed-top">
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-
-        <a class="navbar-brand" href="#">Goddess of CS4241</a>
+      <div id="nav-header">
+        <a id="nav-brand" href="#">Goddess of CS4241</a>
+        <div id="list">
+          <span id="welcome-msg">Hi&nbsp;<span  id="username"></span>!</span>
+          <button href="#">Notification</button>
+          <button onclick="signout();">Sign out</button>
+        </div>
       </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse list" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li><p id="welcome-msg">Hi&nbsp;<span  id="username"></span>!</p></li>
-          <li><button href="#">Notification</button></li>
-          <li><button onclick="signout();">Sign out</button></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
+
   </nav>
   <div class="row" id="setting">
     <div class="col-md-3 block">
