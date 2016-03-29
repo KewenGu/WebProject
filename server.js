@@ -129,26 +129,26 @@ app.post('/add', urlencodedParser, function(req, res) {
 		title: req.body.title,
 	  contents: req.body.contents,
 		create_time: (new Date()).toLocaleString(),
-	  modify_time: (new Date()).toLocaleString()
-	  // isStar: req.body.isStar,
+	  modify_time: (new Date()).toLocaleString(),
+	  isStar: req.body.isStar
 	};
-	if (req.body.isStar) {
-		note.isStar = true;
+	// if (req.body.isStar) {
+	// 	note.isStar = true;
+	// }
+	// else {
+	// 	note.isStar = false;
+	// }
+	// if (req.body.remind_info) {
+	// 	note.remind_info = req.body.remind_info;
+	// }
+	// else {
+	// 	note.remind_info = false;
+	// }
+	if (req.body.attachImage) {
+		note.attachImage = req.body.attachImage;
 	}
 	else {
-		note.isStar = false;
-	}
-	if (req.body.remind_info) {
-		note.remind_info = req.body.remind_info;
-	}
-	else {
-		note.remind_info = false;
-	}
-	if (req.body.attachment_path) {
-		note.attachment_path = req.body.attachment_path;
-	}
-	else {
-		note.attachment_path = false;
+		note.attachImage = '';
 	}
 	profiles.forEach(function(user) {
 		if(user.username === req.body.username){
@@ -197,6 +197,7 @@ app.post('/edit', urlencodedParser, function(req, res) {
 					note.contents = req.body.contents;
 					note.isStar = req.body.isStar;
 					note.modify_time = (new Date()).toLocaleString();
+					note.attachImage = req.body.attachImage;
 					console.log(note);
 				}
 			});
@@ -241,8 +242,9 @@ app.post('/email', urlencodedParser, function(req, res){
 		});
 		transporter.sendMail({
 			to: emailUser.email,
-			subject: emailNote.title,
-			text: emailNote.contents,
+			subject: 'Your reminder from Goddess CS4241',
+			// text: emailNote.contents,
+			html: "<h2>" + emailNote.title + "</h2><p>" + emailNote.contents + "</p><p><a href='" + emailNote.attachImage + "' target='_blank' download='image.jpg'>Download image</a></p>",
 			attachments: [
 				{   // utf-8 string as an attachment
 					filename: 'text1.txt',
@@ -265,6 +267,3 @@ function validateEmail(email) {
 	var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
 }
-
-
-

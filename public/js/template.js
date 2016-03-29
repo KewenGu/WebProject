@@ -6,7 +6,7 @@ var noteTemplate_notStarred = _.template(
   // "<p>Modified Time: <%= modify_time %></p>" +
   // "<p>Reminder: <%= remind_info %></p>" +
   // "<p>Attachment: <%= attachment_path %></p>" +
-  "<p class='note-star'>star<span class='glyphicons glyphicons-star-empty'></span></p>" +
+  "<p class='note-star' hidden>not star</p>" +
   "<p class='note-content'><%= contents %></p>"
 );
 
@@ -19,6 +19,6 @@ var noteTemplate_starred = _.template(
   // "<p>Modified Time: <%= modify_time %></p>" +
   // "<p>Reminder: <%= remind_info %></p>" +
   // "<p>Attachment: <%= attachment_path %></p>" +
-  "<p class='note-star'>not star<span class='glyphicons glyphicons-star'></span></p>" +
+  "<p class='note-star' hidden>starred</p>" +
   "<p class='note-content'><%= contents %></p>"
 );
